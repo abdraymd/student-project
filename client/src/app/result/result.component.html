@@ -1,0 +1,96 @@
+<!-- sidebar -->
+<app-sidebar></app-sidebar>
+
+<main [class.slide]="shouldSlide">
+	<!-- toolbar -->
+	<app-toolbar></app-toolbar>
+
+	<!-- content -->
+	<section class="section">
+		<h1 class="header">Результат</h1>
+
+		<div class="quiz-mr">
+			<div *ngIf="condition; else noQuiz">
+				<h3>Завершение теста</h3>
+				<p>
+					<span>Правильные ответы:</span>
+					{{ quizService.count }}/{{ quizService.questions.length }}
+				</p>
+				<p><span>Время:</span> {{ quizService.displayTimeElapsed() }}</p>
+				<button class="btn-block" (click)="restart()">Пройти заново</button>
+
+				<!-- answers -->
+				<div *ngFor="let question of quizService.questions; let i = index">
+					<div class="question-mr">
+						<p>
+							<span>Вопрос {{ i + 1 }}:</span> {{ question.question }}
+						</p>
+					</div>
+
+					<!-- options -->
+					<ul>
+						<li class="option-mr">
+							<p><span>a)</span> {{ question.firstOption }}</p>
+							<mat-icon
+								*ngIf="quizService.userAnswers[i] == 1 && question.answer == 1"
+								class="icon correct"
+								>check</mat-icon
+							>
+							<mat-icon
+								*ngIf="quizService.userAnswers[i] == 1 && question.answer != 1"
+								class="icon incorrect"
+								>close</mat-icon
+							>
+						</li>
+						<li class="option-mr">
+							<p><span>b)</span> {{ question.secondOption }}</p>
+							<mat-icon
+								*ngIf="quizService.userAnswers[i] == 2 && question.answer == 2"
+								class="icon correct"
+								>check</mat-icon
+							>
+							<mat-icon
+								*ngIf="quizService.userAnswers[i] == 2 && question.answer != 2"
+								class="icon incorrect"
+								>close</mat-icon
+							>
+						</li>
+						<li class="option-mr">
+							<p><span>c)</span> {{ question.thirdOption }}</p>
+							<mat-icon
+								*ngIf="quizService.userAnswers[i] == 3 && question.answer == 3"
+								class="icon correct"
+								>check</mat-icon
+							>
+							<mat-icon
+								*ngIf="quizService.userAnswers[i] == 3 && question.answer != 3"
+								class="icon incorrect"
+								>close</mat-icon
+							>
+						</li>
+						<li class="option-mr">
+							<p><span>d)</span> {{ question.fourthOption }}</p>
+							<mat-icon
+								*ngIf="quizService.userAnswers[i] == 4 && question.answer == 4"
+								class="icon correct"
+								>check</mat-icon
+							>
+							<mat-icon
+								*ngIf="quizService.userAnswers[i] == 4 && question.answer != 4"
+								class="icon incorrect"
+								>close</mat-icon
+							>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<ng-template #noQuiz>
+				<p>
+					Вы не проходили тест. Пожалуйста, перейдите по
+					<a routerLink="/quizzes" class="link">ссылке</a>.
+				</p>
+			</ng-template>
+		</div>
+	</section>
+</main>

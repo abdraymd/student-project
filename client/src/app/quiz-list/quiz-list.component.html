@@ -1,0 +1,53 @@
+<!-- sidebar -->
+<app-sidebar></app-sidebar>
+
+<main [class.slide]="shouldSlide">
+	<!-- toolbar -->
+	<app-toolbar></app-toolbar>
+
+	<!-- content -->
+	<section class="section">
+		<h1 class="header">Тесты</h1>
+
+		<button class="btn-block" *ngIf="authority === 'admin'" (click)="addQuiz()">
+			Добавить тест
+		</button>
+
+		<div class="column-wrapper">
+			<div class="raw-wrapper" *ngFor="let quiz of quizzes">
+				<div class="quiz-l">
+					<h3>{{ quiz.name }}</h3>
+					<p>{{ quiz.text }}</p>
+					<p><span>Количество вопросов:</span> {{ quiz.questions.length }}</p>
+					<div class="quiz-actions">
+						<button
+							id="test"
+							(click)="toQuiz(quiz.id)"
+							class="btn-block"
+							*ngIf="quiz.questions.length"
+						>
+							Пройти тест
+						</button>
+
+						<button
+							id="management"
+							(click)="toQuizManagement(quiz.id)"
+							*ngIf="authority === 'admin'"
+							class="btn-block"
+						>
+							Управление
+						</button>
+					</div>
+				</div>
+				<mat-icon
+					class="btn-close"
+					title="Удалить"
+					*ngIf="authority === 'admin'"
+					(click)="deleteQuiz(quiz)"
+				>
+					clear
+				</mat-icon>
+			</div>
+		</div>
+	</section>
+</main>

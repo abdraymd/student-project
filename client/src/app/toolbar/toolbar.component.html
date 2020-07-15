@@ -1,0 +1,11 @@
+<div id="toolbar">
+	<div class="dropdown" (clickOutside)="closeOptions()">
+		<div class="dropdown-select" [class.select-active]="showOptions" (click)="show()">
+			Профиль
+			<mat-icon>expand_more</mat-icon>
+		</div>
+		<div *ngIf="showOptions" class="dropdown-content">
+			<a (click)="logout()">Выйти</a>
+		</div>
+	</div>
+</div>

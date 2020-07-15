@@ -1,0 +1,30 @@
+<h3>Добавить новость</h3>
+
+<form [formGroup]="formGroup" (ngSubmit)="formGroup.valid && onSubmit()">
+	<input
+		type="text"
+		class="input-text"
+		placeholder="Заголовок"
+		formControlName="title"
+		[class.invalid]="title.invalid && title.touched"
+	/>
+	<textarea
+		rows="4"
+		class="textarea"
+		placeholder="Текст"
+		formControlName="text"
+		[class.invalid]="text.invalid && text.touched"
+	></textarea>
+	<input type="file" id="image" class="input-file" (change)="onImageSelected($event)" />
+	<label for="image">
+		<mat-icon>backup</mat-icon>
+		Выберите картинку
+	</label>
+	<button type="submit" class="btn-block" [disabled]="formGroup.invalid && formGroup.touched">
+		Добавить
+	</button>
+</form>
+
+<mat-icon class="btn-close" title="Закрыть" (click)="onClose()">
+	clear
+</mat-icon>

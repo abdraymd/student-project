@@ -1,0 +1,22 @@
+<!-- sidebar -->
+<app-sidebar></app-sidebar>
+
+<main [class.slide]="shouldSlide">
+	<!-- toolbar -->
+	<app-toolbar></app-toolbar>
+
+	<!-- content -->
+	<section class="section" *ngIf="news">
+		<h1 class="header">Новости: {{ news.title }}</h1>
+
+		<div class="news">
+			<div
+				class="news__image"
+				[ngStyle]="{ 'background-image': 'url(' + imgUrl + news.imageName + ')' }"
+			></div>
+			<h3>{{ news.title }}</h3>
+			<p>{{ news.text }}</p>
+			<p>{{ news.date }}</p>
+		</div>
+	</section>
+</main>

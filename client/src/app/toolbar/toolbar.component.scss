@@ -1,0 +1,52 @@
+#toolbar {
+	height: 50px;
+	background: #fff;
+	padding-right: 20px;
+
+	.dropdown {
+		float: right;
+		position: relative;
+		font-size: 0.9rem;
+
+		.dropdown-select {
+			height: 50px;
+			display: flex;
+			align-items: center;
+			color: #252525;
+			padding: 10px;
+			cursor: pointer;
+
+			mat-icon {
+				&::selection {
+					color: none;
+					background: none;
+				}
+			}
+
+			&:hover {
+				background: #f9f9f9;
+			}
+
+			&.select-active {
+				background: #f9f9f9;
+			}
+		}
+
+		.dropdown-content {
+			right: 0;
+			position: absolute;
+			background-color: #f9f9f9;
+			width: 100%;
+			z-index: 1;
+
+			a {
+				padding: 10px;
+				display: block;
+
+				&:hover {
+					background: #f1f1f1;
+				}
+			}
+		}
+	}
+}

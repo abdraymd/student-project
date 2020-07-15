@@ -1,0 +1,25 @@
+<h3>Добавить тест</h3>
+
+<form [formGroup]="formGroup" (ngSubmit)="formGroup.valid && onSubmit()">
+	<input
+		type="text"
+		class="input-text"
+		placeholder="Название"
+		formControlName="name"
+		[class.invalid]="name.invalid && name.touched"
+	/>
+	<textarea
+		rows="4"
+		class="textarea"
+		placeholder="Описание"
+		formControlName="text"
+		[class.invalid]="text.invalid && text.touched"
+	></textarea>
+	<button type="submit" class="btn-block" [disabled]="formGroup.invalid && formGroup.touched">
+		Добавить
+	</button>
+</form>
+
+<mat-icon class="btn-close" title="Закрыть" (click)="onClose()">
+	clear
+</mat-icon>

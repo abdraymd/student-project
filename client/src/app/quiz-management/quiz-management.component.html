@@ -1,0 +1,58 @@
+<!-- sidebar -->
+<app-sidebar></app-sidebar>
+
+<main [class.slide]="shouldSlide">
+	<!-- toolbar -->
+	<app-toolbar></app-toolbar>
+
+	<!-- content -->
+	<section class="section" *ngIf="quiz">
+		<h1 class="header">Управление: {{ quiz.name }}</h1>
+
+		<div class="quiz-mr">
+			<div *ngIf="authority === 'admin'; else accessDenied">
+				<h3>{{ quiz.name }}</h3>
+				<p>{{ quiz.text }}</p>
+				<button class="btn-block" (click)="addQuestion()">
+					Добавить вопрос
+				</button>
+
+				<!-- questions -->
+				<div *ngFor="let question of quiz.questions; let i = index">
+					<div class="question-mr">
+						<p>
+							<span>Вопрос {{ i + 1 }}:</span> {{ question.question }}
+						</p>
+						<mat-icon (click)="deleteQuestion(question.id)">
+							clear
+						</mat-icon>
+					</div>
+
+					<!-- options -->
+					<ul>
+						<li class="option-mr">
+							<p><span>a)</span> {{ question.firstOption }}</p>
+							<mat-icon *ngIf="question.answer == 1" class="icon correct">check</mat-icon>
+						</li>
+						<li class="option-mr">
+							<p><span>b)</span> {{ question.secondOption }}</p>
+							<mat-icon *ngIf="question.answer == 2" class="icon correct">check</mat-icon>
+						</li>
+						<li class="option-mr">
+							<p><span>c)</span> {{ question.thirdOption }}</p>
+							<mat-icon *ngIf="question.answer == 3" class="icon correct">check</mat-icon>
+						</li>
+						<li class="option-mr">
+							<p><span>d)</span> {{ question.fourthOption }}</p>
+							<mat-icon *ngIf="question.answer == 4" class="icon correct">check</mat-icon>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<ng-template #accessDenied>
+				<p *ngIf="authority === 'user'">У вас нет доступа к данной странице.</p>
+			</ng-template>
+		</div>
+	</section>
+</main>

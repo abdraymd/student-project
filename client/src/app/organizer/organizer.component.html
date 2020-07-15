@@ -1,0 +1,39 @@
+<div>
+	<h3>
+		{{ dateService.date | async | moment | date }}
+	</h3>
+
+	<ul *ngIf="tasks.length; else noTasks">
+		<li class="task" *ngFor="let task of tasks; let i = index">
+			<span>
+				<b>{{ i + 1 }}</b> {{ task.title }}
+			</span>
+
+			<mat-icon (click)="remove(task)" title="Удалить">
+				clear
+			</mat-icon>
+		</li>
+	</ul>
+
+	<ng-template #noTasks>
+		<p class="text">Заметок нет</p>
+	</ng-template>
+
+	<form
+		(ngSubmit)="formGroup.valid && onSubmit(formDirective)"
+		[formGroup]="formGroup"
+		#formDirective="ngForm"
+	>
+		<input
+			type="text"
+			class="input-text"
+			placeholder="Новая заметка"
+			formControlName="title"
+			[class.invalid]="title.invalid && title.touched"
+		/>
+
+		<button class="btn-block" type="submit" [disabled]="formGroup.invalid && formGroup.touched">
+			Записать
+		</button>
+	</form>
+</div>

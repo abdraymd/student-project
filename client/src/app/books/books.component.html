@@ -1,0 +1,38 @@
+<!-- sidebar -->
+<app-sidebar></app-sidebar>
+
+<main [class.slide]="shouldSlide">
+	<!-- toolbar -->
+	<app-toolbar></app-toolbar>
+
+	<!-- content -->
+	<section class="section">
+		<h1 class="header">Библиотека</h1>
+
+		<button class="btn-block" *ngIf="authority === 'admin'" (click)="onAdd()">
+			Добавить книгу
+		</button>
+
+		<div class="wrapper">
+			<div class="raw-wrapper" *ngFor="let book of books">
+				<div class="book-l" (click)="toOneBook(book.id)">
+					<h3>{{ book.name }}</h3>
+					<div
+						class="book-l__image"
+						[ngStyle]="{ 'background-image': 'url(' + imgUrl + book.imageName + ')' }"
+					></div>
+					<p><span>Жанр:</span> {{ book.genre }}</p>
+					<p><span>Автор:</span> {{ book.author }}</p>
+				</div>
+				<mat-icon
+					class="btn-close"
+					title="Удалить"
+					*ngIf="authority === 'admin'"
+					(click)="deleteBook(book)"
+				>
+					clear
+				</mat-icon>
+			</div>
+		</div>
+	</section>
+</main>

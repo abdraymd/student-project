@@ -1,0 +1,31 @@
+<div id="sidebar" [ngClass]="{ 'sidebar-active': isToggleActive }" (clickOutside)="closeToggle()">
+	<button mat-mini-fab title="Меню" class="toggle-btn" (click)="toggle()">
+		<mat-icon>menu</mat-icon>
+	</button>
+	<ul>
+		<li>
+			<a routerLink="/news" routerLinkActive="link-active">
+				<mat-icon class="icon">ballot</mat-icon>
+				Новости
+			</a>
+		</li>
+		<li>
+			<a routerLink="/schedule" routerLinkActive="link-active">
+				<mat-icon class="icon">event_note</mat-icon>
+				Расписание
+			</a>
+		</li>
+		<li>
+			<a routerLink="/books" routerLinkActive="link-active">
+				<mat-icon class="icon">bookmark</mat-icon>
+				Библиотека
+			</a>
+		</li>
+		<li>
+			<a routerLink="/quizzes" routerLinkActive="link-active">
+				<mat-icon class="icon">emoji_events</mat-icon>
+				Тесты
+			</a>
+		</li>
+	</ul>
+</div>

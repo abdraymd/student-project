@@ -1,0 +1,43 @@
+<!-- sidebar -->
+<app-sidebar></app-sidebar>
+
+<main [class.slide]="shouldSlide">
+	<!-- toolbar -->
+	<app-toolbar></app-toolbar>
+
+	<!-- content -->
+	<section class="section">
+		<h1 class="header">Тест: {{ quizService.quizName }}</h1>
+
+		<div
+			class="question"
+			*ngIf="quizService.questions && quizService.progress != quizService.questions.length"
+		>
+			<p>
+				<span>Текущее время:</span>
+				{{ quizService.displayTimeElapsed() }}
+			</p>
+			<h3>Вопрос {{ quizService.progress + 1 }}</h3>
+			<p>{{ quizService.questions[quizService.progress].question }}</p>
+
+			<ul>
+				<li (click)="answer(1)" class="option">
+					<span>A)</span>
+					{{ quizService.questions[quizService.progress].firstOption }}
+				</li>
+				<li (click)="answer(2)" class="option">
+					<span>B)</span>
+					{{ quizService.questions[quizService.progress].secondOption }}
+				</li>
+				<li (click)="answer(3)" class="option">
+					<span>C)</span>
+					{{ quizService.questions[quizService.progress].thirdOption }}
+				</li>
+				<li (click)="answer(4)" class="option">
+					<span>D)</span>
+					{{ quizService.questions[quizService.progress].fourthOption }}
+				</li>
+			</ul>
+		</div>
+	</section>
+</main>

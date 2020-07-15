@@ -1,0 +1,28 @@
+div {
+	position: relative;
+	padding: 18px 20px 15px 20px;
+	width: 450px;
+	background: #fff;
+	border-top-left-radius: 15px;
+	border-top-right-radius: 15px;
+
+	&:after {
+		content: '';
+		height: 1px;
+		width: 410px;
+		position: absolute;
+		bottom: 0;
+		left: 20px;
+		background: #f1f1f1;
+	}
+
+	.btn-select {
+		cursor: pointer;
+		color: #8f8f8f;
+		margin-right: 15px;
+
+		&:last-child {
+			margin-right: 0;
+		}
+	}
+}

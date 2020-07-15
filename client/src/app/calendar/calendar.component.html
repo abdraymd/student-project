@@ -1,0 +1,42 @@
+<div class="calendar">
+	<div class="selector">
+		<mat-icon class="btn-select" (click)="goMonth(-1)" title="Прошлый месяц">
+			arrow_back
+		</mat-icon>
+
+		<h3>
+			{{ dateService.date | async | moment | date: 'MMM yyyy' | titlecase }}
+		</h3>
+
+		<mat-icon class="btn-select" (click)="goMonth(1)" title="Следующий месяц">
+			arrow_forward
+		</mat-icon>
+	</div>
+
+	<table>
+		<thead>
+			<tr>
+				<th>Пн</th>
+				<th>Вт</th>
+				<th>Ср</th>
+				<th>Чт</th>
+				<th>Пт</th>
+				<th>Сб</th>
+				<th>Вс</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let week of calendar">
+				<td
+					*ngFor="let day of week.days"
+					[class.disabled]="day.disabled"
+					(click)="select(day.value)"
+				>
+					<span [class.selected]="day.selected">
+						{{ day.value | moment: 'D' }}
+					</span>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

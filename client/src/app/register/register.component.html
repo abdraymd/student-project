@@ -1,0 +1,87 @@
+<div *ngIf="isLoggedIn; else loggedOut">
+	<p>
+		Извините, но вы уже зашли в свой аккаунт. Нажмите на <a routerLink="/news">ссылку</a>, чтобы
+		вернуться.
+	</p>
+</div>
+
+<ng-template #loggedOut>
+	<div class="auth">
+		<h1 class="header">Регистрация</h1>
+
+		<form [formGroup]="formGroup" (ngSubmit)="formGroup.valid && onSubmit()">
+			<div class="form-group">
+				<input
+					type="text"
+					class="input-text"
+					placeholder="Имя пользователя"
+					formControlName="username"
+					[class.invalid]="username.invalid && username.touched"
+				/>
+				<p *ngIf="username.errors?.minlength && username.touched" class="text-warning">
+					Имя пользователя не должно быть короче 3 символов
+				</p>
+			</div>
+			<div class="form-group">
+				<input
+					class="input-text"
+					type="text"
+					placeholder="Имя"
+					formControlName="name"
+					[class.invalid]="name.invalid && name.touched"
+				/>
+				<p *ngIf="name.errors?.minlength && name.touched" class="text-warning">
+					Имя не должно быть короче 3 символов
+				</p>
+			</div>
+			<div class="form-group">
+				<input
+					class="input-text"
+					type="text"
+					placeholder="Фамилия"
+					formControlName="surname"
+					[class.invalid]="surname.invalid && surname.touched"
+				/>
+				<p *ngIf="surname.errors?.minlength && surname.touched" class="text-warning">
+					Фамилия не должна быть короче 3 символов
+				</p>
+			</div>
+			<div class="form-group">
+				<input
+					class="input-text"
+					type="email"
+					placeholder="Почта"
+					formControlName="email"
+					[class.invalid]="email.invalid && email.touched"
+				/>
+				<p *ngIf="email.errors?.minlength && email.touched" class="text-warning">
+					Почта не должна быть короче 3 символов
+				</p>
+				<p *ngIf="email.errors?.email && email.touched" class="text-warning">
+					Некорректная запись почты
+				</p>
+			</div>
+			<div class="form-group">
+				<input
+					class="input-text"
+					type="password"
+					placeholder="Пароль"
+					formControlName="password"
+					[class.invalid]="password.invalid && password.touched"
+				/>
+				<p *ngIf="password.errors?.minlength && password.touched" class="text-warning">
+					Пароль не должен быть короче 6 символов
+				</p>
+			</div>
+			<div class="warning" *ngIf="isSignUpFailed">
+				<p class="text-warning">
+					Повторите попытку позже
+				</p>
+			</div>
+			<button type="submit" class="btn-block" [disabled]="formGroup.invalid && formGroup.touched">
+				Войти
+			</button>
+			<p class="text-link">Есть аккаунт? <a routerLink="/signin" class="link">Войдите</a></p>
+		</form>
+	</div>
+</ng-template>

@@ -1,0 +1,97 @@
+.calendar {
+	width: 500px;
+	background: #fff;
+	padding: 15px 20px 15px 20px;
+	border-radius: 15px;
+
+	.selector {
+		display: flex;
+		align-items: center;
+		justify-content: space-evenly;
+		width: auto;
+		position: relative;
+		padding-bottom: 14px;
+		margin-bottom: 15px;
+
+		h3 {
+			font-size: 1.2rem;
+			color: #252525;
+			font-weight: 700;
+		}
+
+		.btn-select {
+			cursor: pointer;
+			color: #8f8f8f;
+
+			&::selection {
+				color: none;
+				background: none;
+			}
+		}
+
+		&:after {
+			content: '';
+			height: 1px;
+			width: 100%;
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			background: #f1f1f1;
+		}
+	}
+
+	table {
+		width: 100%;
+		height: 280px;
+		border-collapse: collapse;
+
+		th,
+		td {
+			text-align: center;
+		}
+
+		th {
+			font-size: 1.1rem;
+			font-weight: 400;
+			color: #7d7d7d;
+		}
+
+		td {
+			border-radius: 10px;
+			transition: all 0.2s;
+			font-size: 1.2rem;
+			font-weight: 500;
+			color: #252525;
+
+			&.disabled {
+				pointer-events: none;
+				color: #f0f0f0;
+			}
+
+			&:hover:not(.disabled) {
+				background: #f1f1f1;
+				cursor: pointer;
+			}
+
+			.selected {
+				color: #4f81e3;
+			}
+		}
+	}
+
+	@media screen and (max-width: 480px) {
+		width: 310px;
+
+		table {
+			height: 240px;
+		}
+	}
+
+	@media screen and (max-width: 320px) {
+		width: 260px;
+
+		table {
+			height: 200px;
+		}
+	}
+}

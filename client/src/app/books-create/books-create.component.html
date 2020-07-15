@@ -1,0 +1,49 @@
+<h3>Добавить книгу</h3>
+
+<form [formGroup]="formGroup" (ngSubmit)="formGroup.valid && onSubmit()">
+	<input
+		type="text"
+		class="input-text"
+		placeholder="Название"
+		formControlName="name"
+		[class.invalid]="name.invalid && name.touched"
+	/>
+	<input
+		type="text"
+		class="input-text"
+		placeholder="Автор"
+		formControlName="author"
+		[class.invalid]="author.invalid && author.touched"
+	/>
+	<input
+		type="text"
+		class="input-text"
+		placeholder="Жанр"
+		formControlName="genre"
+		[class.invalid]="genre.invalid && genre.touched"
+	/>
+	<textarea
+		rows="4"
+		class="textarea"
+		placeholder="Описание"
+		formControlName="description"
+		[class.invalid]="description.invalid && description.touched"
+	></textarea>
+	<input type="file" id="image" class="input-file" (change)="onImageSelected($event)" />
+	<label for="image">
+		<mat-icon>backup</mat-icon>
+		Выберите картинку
+	</label>
+	<input type="file" id="file" class="input-file" (change)="onFileSelected($event)" />
+	<label for="file">
+		<mat-icon>backup</mat-icon>
+		Выберите файл
+	</label>
+	<button type="submit" class="btn-block" [disabled]="formGroup.invalid && formGroup.touched">
+		Добавить
+	</button>
+</form>
+
+<mat-icon class="btn-close" title="Закрыть" (click)="onClose()">
+	clear
+</mat-icon>

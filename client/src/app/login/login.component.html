@@ -1,0 +1,56 @@
+<div *ngIf="isLoggedIn; else loggedOut">
+	<p>
+		Извините, но вы уже зашли в свой аккаунт. Нажмите на <a routerLink="/news">ссылку</a>, чтобы
+		вернуться.
+	</p>
+</div>
+
+<ng-template #loggedOut>
+	<div class="auth">
+		<h1 class="header">Добро пожаловать</h1>
+
+		<form [formGroup]="formGroup" (ngSubmit)="formGroup.valid && onSubmit()">
+			<div class="form-group">
+				<input
+					type="text"
+					class="input-text"
+					placeholder="Имя пользователя"
+					formControlName="username"
+					[class.invalid]="username.invalid && username.touched"
+				/>
+				<p *ngIf="username.errors?.minlength && username.touched" class="text-warning">
+					Имя пользователя не должно быть короче 3 символов
+				</p>
+			</div>
+			<div class="form-group">
+				<input
+					class="input-text"
+					type="password"
+					placeholder="Пароль"
+					formControlName="password"
+					[class.invalid]="password.invalid && password.touched"
+				/>
+				<p *ngIf="password.errors?.minlength && password.touched" class="text-warning">
+					Пароль не должен быть короче 6 символов
+				</p>
+			</div>
+
+			<!-- password-forgot -->
+			<div class="forgot">
+				<a routerLink="/password/forgot" class="link">Забыли пароль?</a>
+			</div>
+
+			<div class="warning" *ngIf="isLoginFailed">
+				<p class="text-warning">
+					Вы ввели неправильный пароль или имя пользователя
+				</p>
+			</div>
+			<button type="submit" class="btn-block" [disabled]="formGroup.invalid && formGroup.touched">
+				Войти
+			</button>
+			<p class="text-link">
+				Нет аккаунта? <a routerLink="/signup" class="link">Зарегистрируйтесь</a>
+			</p>
+		</form>
+	</div>
+</ng-template>

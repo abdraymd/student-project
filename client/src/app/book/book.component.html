@@ -1,0 +1,28 @@
+<!-- sidebar -->
+<app-sidebar></app-sidebar>
+
+<main [class.slide]="shouldSlide">
+	<!-- toolbar -->
+	<app-toolbar></app-toolbar>
+
+	<!-- content -->
+	<section class="section" *ngIf="book">
+		<h1 class="header">Библиотека: {{ book.name }}</h1>
+
+		<div class="book">
+			<div>
+				<h3>{{ book.name }}</h3>
+				<p><span>Жанр:</span> {{ book.genre }}</p>
+				<p><span>Автор:</span> {{ book.author }}</p>
+				<p id="descr">{{ book.description }}</p>
+				<button class="btn-block" (click)="downloadFile(book.fileName)">Загрузить</button>
+			</div>
+
+			<!-- image -->
+			<div
+				class="book__image"
+				[ngStyle]="{ 'background-image': 'url(' + imgUrl + book.imageName + ')' }"
+			></div>
+		</div>
+	</section>
+</main>

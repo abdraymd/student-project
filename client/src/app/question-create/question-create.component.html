@@ -1,0 +1,52 @@
+<h3>Добавить вопрос</h3>
+
+<form [formGroup]="formGroup" (ngSubmit)="formGroup.valid && onSubmit()">
+	<textarea
+		rows="4"
+		class="textarea"
+		placeholder="Вопрос"
+		formControlName="question"
+		[class.invalid]="question.invalid && question.touched"
+	></textarea>
+	<input
+		type="text"
+		class="input-text"
+		placeholder="Ответ A"
+		formControlName="firstOption"
+		[class.invalid]="firstOption.invalid && firstOption.touched"
+	/>
+	<input
+		type="text"
+		class="input-text"
+		placeholder="Ответ B"
+		formControlName="secondOption"
+		[class.invalid]="secondOption.invalid && secondOption.touched"
+	/>
+	<input
+		type="text"
+		class="input-text"
+		placeholder="Ответ C"
+		formControlName="thirdOption"
+		[class.invalid]="thirdOption.invalid && thirdOption.touched"
+	/>
+	<input
+		type="text"
+		class="input-text"
+		placeholder="Ответ D"
+		formControlName="fourthOption"
+		[class.invalid]="fourthOption.invalid && fourthOption.touched"
+	/>
+	<mat-radio-group class="radio-group" formControlName="answer">
+		<mat-radio-button class="radio-element" value="1">A</mat-radio-button>
+		<mat-radio-button class="radio-element" value="2">B</mat-radio-button>
+		<mat-radio-button class="radio-element" value="3">C</mat-radio-button>
+		<mat-radio-button class="radio-element" value="4">D</mat-radio-button>
+	</mat-radio-group>
+	<button type="submit" class="btn-block" [disabled]="formGroup.invalid && formGroup.touched">
+		Добавить
+	</button>
+</form>
+
+<mat-icon class="btn-close" title="Закрыть" (click)="onClose()">
+	clear
+</mat-icon>

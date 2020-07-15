@@ -1,0 +1,91 @@
+.book {
+	display: flex;
+	justify-content: space-between;
+	width: 880px;
+	background: #fff;
+	padding: 20px 30px 20px 30px;
+	border-radius: 15px;
+
+	h3 {
+		font-size: 1rem;
+		color: #252525;
+		font-weight: 700;
+		margin-bottom: 12px;
+	}
+
+	p {
+		max-width: 540px;
+		font-size: 15px;
+		font-weight: 400;
+		color: #7d7d7d;
+		margin-bottom: 8px;
+
+		&#descr {
+			margin-bottom: 13px;
+		}
+
+		span {
+			color: #252525;
+			font-weight: 500;
+		}
+	}
+
+	button {
+		margin-bottom: 0;
+	}
+
+	.book__image {
+		background-color: #f1f1f1;
+		height: 340px;
+		min-height: 340px;
+		min-width: 226px;
+		margin-left: 30px;
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+	}
+
+	@media screen and (max-width: 1230px) {
+		width: 100%;
+	}
+
+	@media screen and (max-width: 1030px) {
+		flex-direction: column-reverse;
+
+		h3 {
+			margin-top: 15px;
+			text-align: center;
+		}
+
+		p {
+			min-width: 100%;
+		}
+
+		button {
+			margin: 0 auto;
+		}
+
+		.book__image {
+			max-height: 340px;
+			max-width: 226px;
+			margin: 0 auto;
+		}
+	}
+
+	@media screen and (max-width: 480px) {
+		button {
+			width: 100%;
+		}
+	}
+
+	@media screen and (max-width: 320px) {
+		min-width: 260px;
+		padding: 15px 20px 15px 20px;
+
+		.book__image {
+			max-height: 240px;
+			max-width: 160px;
+			margin: 0 auto;
+		}
+	}
+}

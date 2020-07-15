@@ -1,0 +1,58 @@
+.book-l {
+	width: 300px;
+	background: #fafafa;
+	border-radius: 15px;
+	padding-top: 15px;
+	padding-bottom: 10px;
+	cursor: pointer;
+
+	&:hover {
+		.book-l__image {
+			transform: translateY(-7px);
+		}
+	}
+
+	h3 {
+		margin-bottom: 12px;
+		text-align: center;
+		font-size: 1rem;
+		color: #252525;
+		font-weight: 700;
+	}
+
+	.book-l__image {
+		margin: 0 auto;
+		background-color: #f1f1f1;
+		height: 240px;
+		width: 160px;
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+		margin-bottom: 10px;
+		transition: all 0.3s linear;
+	}
+
+	p {
+		text-align: center;
+		font-size: 0.9rem;
+		font-weight: 400;
+		color: #747c82;
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+
+		span {
+			color: #252525;
+			font-weight: 500;
+		}
+	}
+
+	@media screen and (max-width: 1030px) {
+		width: 280px;
+	}
+
+	@media screen and (max-width: 320px) {
+		width: 240px;
+	}
+}
