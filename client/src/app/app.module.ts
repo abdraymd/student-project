@@ -3,14 +3,7 @@ import { NgModule, LOCALE_ID } from '@angular/core'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { HttpClientModule } from '@angular/common/http'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-import {
-	MatDialogModule,
-	MatIconModule,
-	MatInputModule,
-	MatFormFieldModule,
-	MatButtonModule,
-	MatRadioModule
-} from '@angular/material'
+import { MatDialogModule, MatIconModule, MatButtonModule, MatRadioModule } from '@angular/material'
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component'
 import { LoginComponent } from './login/login.component'
@@ -37,9 +30,11 @@ import { BookComponent } from './book/book.component'
 import { SidebarComponent } from './sidebar/sidebar.component'
 import { ToolbarComponent } from './toolbar/toolbar.component'
 import { ClickOutsideDirective } from './shared/click-outside.directive'
-import { NewsSingleComponent } from './news-single/news-single.component';
-import { PasswordForgotComponent } from './password-forgot/password-forgot.component';
+import { NewsSingleComponent } from './news-single/news-single.component'
+import { PasswordForgotComponent } from './password-forgot/password-forgot.component'
 import { PasswordResetComponent } from './password-reset/password-reset.component'
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { SpinnerComponent } from './spinner/spinner.component'
 
 registerLocaleData(localeRu, 'ru')
 
@@ -69,7 +64,8 @@ registerLocaleData(localeRu, 'ru')
 		ClickOutsideDirective,
 		NewsSingleComponent,
 		PasswordForgotComponent,
-		PasswordResetComponent
+		PasswordResetComponent,
+		SpinnerComponent
 	],
 	imports: [
 		BrowserModule,
@@ -80,10 +76,9 @@ registerLocaleData(localeRu, 'ru')
 		BrowserAnimationsModule,
 		MatDialogModule,
 		MatIconModule,
-		MatInputModule,
-		MatFormFieldModule,
 		MatButtonModule,
-		MatRadioModule
+		MatRadioModule,
+		InfiniteScrollModule
 	],
 	providers: [{ provide: LOCALE_ID, useValue: 'ru' }, httpInterceptorProviders],
 	bootstrap: [AppComponent],

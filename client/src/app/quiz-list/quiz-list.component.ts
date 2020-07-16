@@ -16,6 +16,9 @@ export class QuizListComponent implements OnInit {
 	authority: string
 	shouldSlide: boolean
 	innerWidth: any
+	scrollingQuizzes: Quiz[] = []
+	scrollValue: number = 0
+	isSpinning: boolean = false
 
 	constructor(
 		private quizService: QuizService,
@@ -28,6 +31,7 @@ export class QuizListComponent implements OnInit {
 
 		this.quizService.listen().subscribe(response => {
 			console.log(response)
+			this.scrollValue = 0
 			this.getAllQuizzes()
 		})
 	}
@@ -51,6 +55,23 @@ export class QuizListComponent implements OnInit {
 		this.getAllQuizzes()
 	}
 
+	onScroll() {
+		if (this.scrollingQuizzes.length === this.quizzes.length) {
+			this.isSpinning = false
+			return
+		}
+
+		this.isSpinning = true
+
+		this.scrollingQuizzes = this.scrollingQuizzes.concat(
+			this.quizzes.slice(this.scrollValue, this.scrollValue + 4)
+		)
+
+		this.isSpinning = false
+
+		this.scrollValue += 4
+	}
+
 	slideOnWidth() {
 		this.innerWidth = window.innerWidth
 		if (this.innerWidth <= 768) this.shouldSlide = false
@@ -67,6 +88,9 @@ export class QuizListComponent implements OnInit {
 			this.quizzes = response.sort((a, b) => {
 				return b.id - a.id
 			})
+
+			this.scrollingQuizzes = this.quizzes.slice(this.scrollValue, this.scrollValue + 4)
+			this.scrollValue += 4
 		})
 	}
 
@@ -87,8 +111,8 @@ export class QuizListComponent implements OnInit {
 	}
 
 	deleteQuiz(quiz: Quiz) {
-		this.quizService.deleteQuiz(quiz.id).subscribe(response => {
-			this.getAllQuizzes()
+		this.quizService.deleteQuiz(quiz.id).subscribe(() => {
+			this.quizzes = this.quizzes.filter(q => q.id !== quiz.id)
 		})
 	}
 }

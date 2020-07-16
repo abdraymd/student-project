@@ -13,8 +13,16 @@
 			Добавить тест
 		</button>
 
-		<div class="column-wrapper">
-			<div class="raw-wrapper" *ngFor="let quiz of quizzes">
+		<div
+			class="column-wrapper"
+			infiniteScroll
+			[infiniteScrollDistance]="1"
+			[infiniteScrollThrottle]="1000"
+			[fromRoot]="true"
+			[infiniteScrollContainer]="'body'"
+			(scrolled)="onScroll()"
+		>
+			<div class="raw-wrapper" *ngFor="let quiz of scrollingQuizzes">
 				<div class="quiz-l">
 					<h3>{{ quiz.name }}</h3>
 					<p>{{ quiz.text }}</p>
@@ -49,5 +57,8 @@
 				</mat-icon>
 			</div>
 		</div>
+
+		<!-- spinner -->
+		<app-spinner *ngIf="isSpinning"></app-spinner>
 	</section>
 </main>

@@ -22,6 +22,7 @@ export class PasswordForgotComponent implements OnInit {
 	}
 
 	onSubmit() {
+		this.isFailed = false
 		this.isSpinning = true
 
 		this.passwordService.forgot(this.email.value).subscribe(

@@ -16,6 +16,9 @@ export class NewsComponent implements OnInit {
 	authority: string
 	shouldSlide: boolean
 	innerWidth: any
+	scrollingNews: News[] = []
+	scrollValue: number = 0
+	isSpinning: boolean = false
 
 	constructor(
 		private newsService: NewsService,
@@ -28,6 +31,7 @@ export class NewsComponent implements OnInit {
 
 		this.newsService.listen().subscribe(response => {
 			console.log(response)
+			this.scrollValue = 0
 			this.getNews()
 		})
 	}
@@ -51,6 +55,23 @@ export class NewsComponent implements OnInit {
 		this.getNews()
 	}
 
+	onScroll() {
+		if (this.scrollingNews.length === this.news.length) {
+			this.isSpinning = false
+			return
+		}
+
+		this.isSpinning = true
+
+		this.scrollingNews = this.scrollingNews.concat(
+			this.news.slice(this.scrollValue, this.scrollValue + 4)
+		)
+
+		this.isSpinning = false
+
+		this.scrollValue += 4
+	}
+
 	slideOnWidth() {
 		this.innerWidth = window.innerWidth
 		if (this.innerWidth <= 768) this.shouldSlide = false
@@ -67,12 +88,15 @@ export class NewsComponent implements OnInit {
 			this.news = response.sort((a, b) => {
 				return b.id - a.id
 			})
+
+			this.scrollingNews = this.news.slice(this.scrollValue, this.scrollValue + 4)
+			this.scrollValue += 4
 		})
 	}
 
 	deleteNews(news: News) {
-		this.newsService.delete(news).subscribe(response => {
-			this.getNews()
+		this.newsService.delete(news).subscribe(() => {
+			this.news = this.news.filter(n => n.id !== news.id)
 		})
 	}
 

@@ -13,8 +13,16 @@
 			Добавить новость
 		</button>
 
-		<div class="wrapper">
-			<div class="raw-wrapper" *ngFor="let item of news">
+		<div
+			class="wrapper"
+			infiniteScroll
+			[infiniteScrollDistance]="1"
+			[infiniteScrollThrottle]="1000"
+			[fromRoot]="true"
+			[infiniteScrollContainer]="'body'"
+			(scrolled)="onScroll()"
+		>
+			<div class="raw-wrapper" *ngFor="let item of scrollingNews">
 				<div class="news" (click)="toOneNews(item.id)">
 					<h3>{{ item.title }}</h3>
 					<div
@@ -35,5 +43,8 @@
 				</mat-icon>
 			</div>
 		</div>
+
+		<!-- spinner -->
+		<app-spinner *ngIf="isSpinning"></app-spinner>
 	</section>
 </main>

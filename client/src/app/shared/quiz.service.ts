@@ -7,7 +7,7 @@ export interface Quiz {
 	id?: number
 	name: string
 	text: string
-	questions?: Question
+	questions?: Question[]
 }
 
 export interface Question {
@@ -59,10 +59,7 @@ export class QuizService {
 	}
 
 	deleteQuestionFromQuiz(questionId: number): Observable<void> {
-		return this.http.delete<void>(
-			`${QuizService.url}/question/${questionId}`,
-			httpOptions
-		)
+		return this.http.delete<void>(`${QuizService.url}/question/${questionId}`, httpOptions)
 	}
 
 	displayTimeElapsed() {

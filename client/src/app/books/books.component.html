@@ -13,8 +13,16 @@
 			Добавить книгу
 		</button>
 
-		<div class="wrapper">
-			<div class="raw-wrapper" *ngFor="let book of books">
+		<div
+			class="wrapper"
+			infiniteScroll
+			[infiniteScrollDistance]="1"
+			[infiniteScrollThrottle]="1000"
+			[fromRoot]="true"
+			[infiniteScrollContainer]="'body'"
+			(scrolled)="onScroll()"
+		>
+			<div class="raw-wrapper" *ngFor="let book of scrollingBooks">
 				<div class="book-l" (click)="toOneBook(book.id)">
 					<h3>{{ book.name }}</h3>
 					<div
@@ -34,5 +42,8 @@
 				</mat-icon>
 			</div>
 		</div>
+
+		<!-- spinner -->
+		<app-spinner *ngIf="isSpinning"></app-spinner>
 	</section>
 </main>

@@ -16,6 +16,9 @@ export class BooksComponent implements OnInit {
 	authority: string
 	shouldSlide: boolean
 	innerWidth: any
+	scrollingBooks: Book[] = []
+	scrollValue: number = 0
+	isSpinning: boolean = false
 
 	constructor(
 		private bookService: BookService,
@@ -28,6 +31,7 @@ export class BooksComponent implements OnInit {
 
 		this.bookService.listen().subscribe(response => {
 			console.log(response)
+			this.scrollValue = 0
 			this.getBooks()
 		})
 	}
@@ -51,6 +55,23 @@ export class BooksComponent implements OnInit {
 		}
 	}
 
+	onScroll() {
+		if (this.scrollingBooks.length === this.books.length) {
+			this.isSpinning = false
+			return
+		}
+
+		this.isSpinning = true
+
+		this.scrollingBooks = this.scrollingBooks.concat(
+			this.books.slice(this.scrollValue, this.scrollValue + 6)
+		)
+
+		this.isSpinning = false
+
+		this.scrollValue += 6
+	}
+
 	slideOnWidth() {
 		this.innerWidth = window.innerWidth
 		if (this.innerWidth <= 768) this.shouldSlide = false
@@ -67,12 +88,15 @@ export class BooksComponent implements OnInit {
 			this.books = response.sort((a, b) => {
 				return b.id - a.id
 			})
+
+			this.scrollingBooks = this.books.slice(this.scrollValue, this.scrollValue + 6)
+			this.scrollValue += 6
 		})
 	}
 
 	deleteBook(book: Book) {
-		this.bookService.delete(book).subscribe(response => {
-			this.getBooks()
+		this.bookService.delete(book).subscribe(() => {
+			this.books = this.books.filter(b => b.id !== book.id)
 		})
 	}
 

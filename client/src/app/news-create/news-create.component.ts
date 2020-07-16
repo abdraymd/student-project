@@ -45,8 +45,6 @@ export class NewsCreateComponent implements OnInit {
 		formData.append('date', this.dateService.date.value.format('DD-MM-YYYY'))
 		formData.append('image', this.image.value)
 
-		console.log(this.formGroup.value)
-
 		this.newsService.create(formData).subscribe(
 			response => {
 				this.newsService.filter('Registered!')

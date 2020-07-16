@@ -85,7 +85,7 @@ export class QuizManagementComponent implements OnInit {
 	deleteQuestion(questionId: number) {
 		return this.quizService.deleteQuestionFromQuiz(questionId).subscribe(
 			response => {
-				this.getQuiz(this.id)
+				this.quiz.questions = this.quiz.questions.filter(q => q.id !== questionId)
 			},
 			error => {
 				console.error(error)
