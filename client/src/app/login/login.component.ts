@@ -40,6 +40,10 @@ export class LoginComponent implements OnInit {
 			data => {
 				this.token.saveToken(data.accessToken)
 				this.token.saveUsername(data.username)
+
+				if (data.profileImage) this.token.saveAvatar(data.profileImage)
+				else this.token.saveAvatar('')
+
 				this.token.saveAuthorities(data.authorities)
 
 				this.isLoggedIn = true

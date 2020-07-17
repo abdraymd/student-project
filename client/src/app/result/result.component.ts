@@ -1,5 +1,13 @@
 import { Component, OnInit, HostListener } from '@angular/core'
-import { QuizService } from '../shared/quiz.service'
+import {
+	QuizService,
+	QUESTIONS_KEY,
+	PROGRESS_KEY,
+	SECONDS_KEY,
+	USER_ANSWERS_KEY,
+	QUIZ_ID_KEY,
+	QUIZ_NAME_KEY
+} from '../shared/quiz.service'
 import { Router } from '@angular/router'
 import { Title } from '@angular/platform-browser'
 
@@ -13,24 +21,25 @@ export class ResultComponent implements OnInit {
 	shouldSlide: boolean
 	innerWidth: any
 
-	constructor(private quizService: QuizService, private router: Router, private title: Title) {
-		this.title.setTitle('Результат')
-	}
+	constructor(private quizService: QuizService, private router: Router, private title: Title) {}
 
 	ngOnInit() {
 		this.slideOnWidth()
 
 		if (
-			JSON.parse(sessionStorage.getItem('questions')) &&
-			parseInt(sessionStorage.getItem('progress')) ==
-				JSON.parse(sessionStorage.getItem('questions')).length
+			JSON.parse(sessionStorage.getItem(QUESTIONS_KEY)) &&
+			parseInt(sessionStorage.getItem(PROGRESS_KEY)) ==
+				JSON.parse(sessionStorage.getItem(QUESTIONS_KEY)).length
 		) {
 			this.condition = true
 
-			this.quizService.seconds = parseInt(sessionStorage.getItem('seconds'))
-			this.quizService.progress = parseInt(sessionStorage.getItem('progress'))
-			this.quizService.questions = JSON.parse(sessionStorage.getItem('questions'))
-			this.quizService.userAnswers = JSON.parse(sessionStorage.getItem('userAnswers'))
+			this.quizService.quizName = sessionStorage.getItem(QUIZ_NAME_KEY)
+			this.title.setTitle('Результат: ' + this.quizService.quizName)
+
+			this.quizService.seconds = parseInt(sessionStorage.getItem(SECONDS_KEY))
+			this.quizService.progress = parseInt(sessionStorage.getItem(PROGRESS_KEY))
+			this.quizService.questions = JSON.parse(sessionStorage.getItem(QUESTIONS_KEY))
+			this.quizService.userAnswers = JSON.parse(sessionStorage.getItem(USER_ANSWERS_KEY))
 
 			this.quizService.count = 0
 
@@ -39,7 +48,7 @@ export class ResultComponent implements OnInit {
 					this.quizService.count++
 				}
 			}
-		} else if (parseInt(sessionStorage.getItem('quizId'))) {
+		} else if (parseInt(sessionStorage.getItem(QUIZ_ID_KEY))) {
 			this.router.navigate(['/quizzes', parseInt(sessionStorage.getItem('quizId'))])
 		}
 	}
@@ -56,10 +65,10 @@ export class ResultComponent implements OnInit {
 	}
 
 	restart() {
-		sessionStorage.setItem('seconds', '0')
-		sessionStorage.setItem('progress', '0')
-		sessionStorage.setItem('questions', '[]')
-		sessionStorage.setItem('userAnswers', '[]')
+		sessionStorage.setItem(SECONDS_KEY, '0')
+		sessionStorage.setItem(PROGRESS_KEY, '0')
+		sessionStorage.setItem(QUESTIONS_KEY, '[]')
+		sessionStorage.setItem(USER_ANSWERS_KEY, '[]')
 		this.router.navigate(['/quizzes', parseInt(sessionStorage.getItem('quizId'))])
 	}
 }

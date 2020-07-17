@@ -37,10 +37,14 @@ a {
 }
 
 button,
+a {
+	cursor: pointer;
+}
+
+button,
 a,
 input,
 textarea {
-	cursor: pointer;
 	outline: none;
 }
 

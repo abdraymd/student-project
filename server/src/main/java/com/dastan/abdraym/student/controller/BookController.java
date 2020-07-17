@@ -1,9 +1,9 @@
 package com.dastan.abdraym.student.controller;
 
 import com.dastan.abdraym.student.model.Book;
-import com.dastan.abdraym.student.report.response.ResponseReport;
+import com.dastan.abdraym.student.report.response.Response;
 import com.dastan.abdraym.student.repository.BookRepository;
-import org.springframework.beans.factory.annotation.Value;
+import com.dastan.abdraym.student.service.FileService;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -14,23 +14,19 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.EntityNotFoundException;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.List;
-import java.util.UUID;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/book")
 @RestController
 public class BookController {
-    @Value("${upload.path}")
-    private String uploadPath;
-
     private BookRepository bookRepository;
+    private FileService fileService;
 
-    public BookController(BookRepository bookRepository) {
+    public BookController(BookRepository bookRepository, FileService fileService) {
         this.bookRepository = bookRepository;
+        this.fileService = fileService;
     }
 
     @GetMapping
@@ -49,19 +45,18 @@ public class BookController {
 
     @GetMapping("/download")
     public ResponseEntity<?> downloadFile(@RequestParam String fileName) throws IOException {
-        File file = new File(uploadPath + "/books/" + fileName);
+        InputStreamResource isr = fileService.getResource("/books/" + fileName);
 
-        // download book
-        if (file.exists()) {
+        // download file
+        if (isr.exists()) {
             HttpHeaders httpHeaders = new HttpHeaders();
             httpHeaders.setContentType(MediaType.APPLICATION_PDF);
             httpHeaders.setContentDispositionFormData("attachment", fileName);
 
-            InputStreamResource isr = new InputStreamResource(new FileInputStream(file));
             return new ResponseEntity<InputStreamResource>(isr, httpHeaders, HttpStatus.OK);
         }
 
-        return new ResponseEntity<>(new ResponseReport("Fail -> File not found!"), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(new Response("Fail -> File not found!"), HttpStatus.BAD_REQUEST);
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -78,30 +73,12 @@ public class BookController {
 
         // saving image
         if (image != null && !image.getOriginalFilename().isEmpty()) {
-            File imagesDir = new File(uploadPath + "/images");
-
-            if (!imagesDir.exists()) imagesDir.mkdir();
-
-            String imgUuid = UUID.randomUUID().toString();
-            String imageName = imgUuid + "." + image.getOriginalFilename();
-
-            image.transferTo(new File(imagesDir + "/" + imageName));
-
-            book.setImageName(imageName);
+            book.setImageName(fileService.uploadFile(image, "/images"));
         }
 
         // saving book
         if (file != null && !file.getOriginalFilename().isEmpty()) {
-            File booksDir = new File(uploadPath + "/books");
-
-            if (!booksDir.exists()) booksDir.mkdir();
-
-            String bookUuid = UUID.randomUUID().toString();
-            String fileName = bookUuid + "." + file.getOriginalFilename();
-
-            file.transferTo(new File(booksDir + "/" + fileName));
-
-            book.setFileName(fileName);
+            book.setFileName(fileService.uploadFile(file, "/books"));
         }
 
         return ResponseEntity.ok(bookRepository.save(book));
@@ -114,12 +91,10 @@ public class BookController {
                 .orElseThrow(() -> new EntityNotFoundException("Fail! -> Book not found!"));
 
         // removing image
-        File image = new File(uploadPath + "/images/" + book.getImageName());
-        if (image.exists()) image.delete();
+        if (!book.getImageName().isEmpty()) fileService.removeFile("/images/" + book.getImageName());
 
         // removing book
-        File file = new File(uploadPath + "/books/" + book.getFileName());
-        if (file.exists()) file.delete();
+        if (!book.getFileName().isEmpty()) fileService.removeFile("/books/" + book.getFileName());
 
         bookRepository.delete(book);
         return new ResponseEntity<Book>(HttpStatus.NO_CONTENT);

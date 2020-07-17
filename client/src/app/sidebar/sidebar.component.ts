@@ -1,6 +1,4 @@
-import { Component, Output, EventEmitter, HostListener, OnInit } from '@angular/core'
-import { TokenService } from '../auth/token.service'
-import { Router } from '@angular/router'
+import { Component, HostListener, OnInit } from '@angular/core'
 
 @Component({
 	selector: 'app-sidebar',

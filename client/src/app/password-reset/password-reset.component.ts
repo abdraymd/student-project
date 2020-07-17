@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core'
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
-import { PasswordService } from '../shared/password.service'
 import { ActivatedRoute } from '@angular/router'
 import { MustMatch } from '../shared/must-match.validator'
+import { UserService } from '../shared/user.service'
 
 @Component({
 	selector: 'app-password-reset',
@@ -15,7 +15,7 @@ export class PasswordResetComponent implements OnInit {
 
 	constructor(
 		private formBuilder: FormBuilder,
-		private passwordService: PasswordService,
+		private userService: UserService,
 		private activatedRoute: ActivatedRoute
 	) {}
 
@@ -34,7 +34,7 @@ export class PasswordResetComponent implements OnInit {
 	onSubmit() {
 		const token = this.activatedRoute.snapshot.params['token']
 
-		this.passwordService.reset(token, this.password.value).subscribe(response => {
+		this.userService.reset(token, this.password.value).subscribe(response => {
 			this.isSuccessful = true
 		})
 	}

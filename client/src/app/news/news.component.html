@@ -27,7 +27,7 @@
 					<h3>{{ item.title }}</h3>
 					<div
 						class="news-content"
-						[ngStyle]="{ 'background-image': 'url(' + imgUrl + item.imageName + ')' }"
+						[style.backgroundImage]="'url(' + imgUrl + item.imageName + ')'"
 					>
 						<div class="overlay"></div>
 						<p>{{ item.text }}</p>

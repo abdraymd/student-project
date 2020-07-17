@@ -1,5 +1,13 @@
 import { Component, OnInit, HostListener } from '@angular/core'
-import { QuizService, Quiz } from '../shared/quiz.service'
+import {
+	QuizService,
+	QUIZ_ID_KEY,
+	SECONDS_KEY,
+	QUIZ_NAME_KEY,
+	PROGRESS_KEY,
+	QUESTIONS_KEY,
+	USER_ANSWERS_KEY
+} from '../shared/quiz.service'
 import { ActivatedRoute, Router } from '@angular/router'
 import { Title } from '@angular/platform-browser'
 
@@ -26,16 +34,16 @@ export class QuizComponent implements OnInit {
 		this.id = this.activatedRoute.snapshot.params['id']
 
 		if (
-			parseInt(sessionStorage.getItem('quizId')) == this.id &&
-			parseInt(sessionStorage.getItem('seconds')) > 0
+			parseInt(sessionStorage.getItem(QUIZ_ID_KEY)) == this.id &&
+			parseInt(sessionStorage.getItem(SECONDS_KEY)) > 0
 		) {
-			this.quizService.quizName = sessionStorage.getItem('quizName')
+			this.quizService.quizName = sessionStorage.getItem(QUIZ_NAME_KEY)
 			this.title.setTitle('Тест: ' + this.quizService.quizName)
 
-			this.quizService.seconds = parseInt(sessionStorage.getItem('seconds'))
-			this.quizService.progress = parseInt(sessionStorage.getItem('progress'))
-			this.quizService.questions = JSON.parse(sessionStorage.getItem('questions'))
-			this.quizService.userAnswers = JSON.parse(sessionStorage.getItem('userAnswers'))
+			this.quizService.seconds = parseInt(sessionStorage.getItem(SECONDS_KEY))
+			this.quizService.progress = parseInt(sessionStorage.getItem(PROGRESS_KEY))
+			this.quizService.questions = JSON.parse(sessionStorage.getItem(QUESTIONS_KEY))
+			this.quizService.userAnswers = JSON.parse(sessionStorage.getItem(USER_ANSWERS_KEY))
 
 			if (this.quizService.progress == this.quizService.questions.length) {
 				this.router.navigate(['/result'])
@@ -43,10 +51,10 @@ export class QuizComponent implements OnInit {
 				this.startTimer()
 			}
 		} else {
-			sessionStorage.setItem('quizId', this.id.toString())
-			sessionStorage.setItem('seconds', '0')
-			sessionStorage.setItem('progress', '0')
-			sessionStorage.setItem('userAnswers', '[]')
+			sessionStorage.setItem(QUIZ_ID_KEY, this.id.toString())
+			sessionStorage.setItem(SECONDS_KEY, '0')
+			sessionStorage.setItem(PROGRESS_KEY, '0')
+			sessionStorage.setItem(USER_ANSWERS_KEY, '[]')
 
 			this.quizService.seconds = 0
 			this.quizService.progress = 0
@@ -72,30 +80,30 @@ export class QuizComponent implements OnInit {
 		this.quizService.getQuiz(this.id).subscribe((response: any) => {
 			this.quizService.quizName = response.name
 			this.title.setTitle('Тест: ' + this.quizService.quizName)
+			sessionStorage.setItem(QUIZ_NAME_KEY, this.quizService.quizName)
 
 			this.quizService.questions = response.questions
 			this.quizService.questions.sort((a, b) => {
 				return a.id - b.id
 			})
 
-			sessionStorage.setItem('quizName', this.quizService.quizName)
-			sessionStorage.setItem('questions', JSON.stringify(this.quizService.questions))
+			sessionStorage.setItem(QUESTIONS_KEY, JSON.stringify(this.quizService.questions))
 		})
 	}
 
 	startTimer() {
 		this.quizService.timer = setInterval(() => {
 			this.quizService.seconds++
-			sessionStorage.setItem('seconds', this.quizService.seconds.toString())
+			sessionStorage.setItem(SECONDS_KEY, this.quizService.seconds.toString())
 		}, 1000)
 	}
 
 	answer(choice: number) {
 		this.quizService.userAnswers[this.quizService.progress] = choice
-		sessionStorage.setItem('userAnswers', JSON.stringify(this.quizService.userAnswers))
+		sessionStorage.setItem(USER_ANSWERS_KEY, JSON.stringify(this.quizService.userAnswers))
 
 		this.quizService.progress++
-		sessionStorage.setItem('progress', this.quizService.progress.toString())
+		sessionStorage.setItem(PROGRESS_KEY, this.quizService.progress.toString())
 
 		if (this.quizService.progress == this.quizService.questions.length) {
 			clearInterval(this.quizService.timer)

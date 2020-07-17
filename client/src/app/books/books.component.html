@@ -26,8 +26,8 @@
 				<div class="book-l" (click)="toOneBook(book.id)">
 					<h3>{{ book.name }}</h3>
 					<div
-						class="book-l__image"
-						[ngStyle]="{ 'background-image': 'url(' + imgUrl + book.imageName + ')' }"
+						class="book-l-image"
+						[style.backgroundImage]="'url(' + imgUrl + book.imageName + ')'"
 					></div>
 					<p><span>Жанр:</span> {{ book.genre }}</p>
 					<p><span>Автор:</span> {{ book.author }}</p>

@@ -34,7 +34,8 @@ import { NewsSingleComponent } from './news-single/news-single.component'
 import { PasswordForgotComponent } from './password-forgot/password-forgot.component'
 import { PasswordResetComponent } from './password-reset/password-reset.component'
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { SpinnerComponent } from './spinner/spinner.component'
+import { SpinnerComponent } from './spinner/spinner.component';
+import { UserEditComponent } from './user-edit/user-edit.component'
 
 registerLocaleData(localeRu, 'ru')
 
@@ -65,7 +66,8 @@ registerLocaleData(localeRu, 'ru')
 		NewsSingleComponent,
 		PasswordForgotComponent,
 		PasswordResetComponent,
-		SpinnerComponent
+		SpinnerComponent,
+		UserEditComponent
 	],
 	imports: [
 		BrowserModule,

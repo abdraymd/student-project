@@ -56,20 +56,19 @@ export class BooksComponent implements OnInit {
 	}
 
 	onScroll() {
-		if (this.scrollingBooks.length === this.books.length) {
-			this.isSpinning = false
-			return
-		}
+		if (this.scrollingBooks.length === this.books.length) return
 
 		this.isSpinning = true
 
-		this.scrollingBooks = this.scrollingBooks.concat(
-			this.books.slice(this.scrollValue, this.scrollValue + 6)
-		)
+		this.scrollingBooks = this.scrollingBooks.concat(this.sliceBooks())
 
 		this.isSpinning = false
 
 		this.scrollValue += 6
+	}
+
+	sliceBooks() {
+		return this.books.slice(this.scrollValue, this.scrollValue + 6)
 	}
 
 	slideOnWidth() {
@@ -89,7 +88,7 @@ export class BooksComponent implements OnInit {
 				return b.id - a.id
 			})
 
-			this.scrollingBooks = this.books.slice(this.scrollValue, this.scrollValue + 6)
+			this.scrollingBooks = this.sliceBooks()
 			this.scrollValue += 6
 		})
 	}
@@ -97,6 +96,10 @@ export class BooksComponent implements OnInit {
 	deleteBook(book: Book) {
 		this.bookService.delete(book).subscribe(() => {
 			this.books = this.books.filter(b => b.id !== book.id)
+
+			this.scrollValue = 0
+			this.scrollingBooks = this.sliceBooks()
+			this.scrollValue += 6
 		})
 	}
 

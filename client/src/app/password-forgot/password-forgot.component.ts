@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
-import { PasswordService } from '../shared/password.service'
+import { UserService } from '../shared/user.service'
 
 @Component({
 	selector: 'app-password-forgot',
@@ -13,7 +13,7 @@ export class PasswordForgotComponent implements OnInit {
 	isFailed: boolean = false
 	isSpinning: boolean = false
 
-	constructor(private formBuilder: FormBuilder, private passwordService: PasswordService) {}
+	constructor(private formBuilder: FormBuilder, private userService: UserService) {}
 
 	ngOnInit() {
 		this.formGroup = this.formBuilder.group({
@@ -25,12 +25,13 @@ export class PasswordForgotComponent implements OnInit {
 		this.isFailed = false
 		this.isSpinning = true
 
-		this.passwordService.forgot(this.email.value).subscribe(
+		this.userService.forgot(this.email.value).subscribe(
 			response => {
 				this.isSpinning = false
 				this.isSubmitted = true
 			},
 			error => {
+				console.error(error)
 				this.isSpinning = false
 				this.isFailed = true
 			}

@@ -1,7 +1,13 @@
 <div id="toolbar">
 	<div class="dropdown" (clickOutside)="closeOptions()">
 		<div class="dropdown-select" [class.select-active]="showOptions" (click)="show()">
-			Профиль
+			<div
+				class="avatar"
+				[style.backgroundImage]="
+					avatar ? 'url(' + avatarUrl + ')' : 'url(' + '../../assets/images/avatar.png' + ')'
+				"
+			></div>
+			<p>Профиль</p>
 			<mat-icon>expand_more</mat-icon>
 		</div>
 		<div *ngIf="showOptions" class="dropdown-content">

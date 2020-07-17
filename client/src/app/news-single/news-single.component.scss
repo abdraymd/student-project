@@ -4,7 +4,7 @@
 	border-radius: 15px;
 	padding-bottom: 17px;
 
-	.news__image {
+	.news-image {
 		background-color: #f1f1f1;
 		height: 400px;
 		width: 100%;
@@ -43,7 +43,7 @@
 	}
 
 	@media screen and (max-width: 1030px) {
-		.news__image {
+		.news-image {
 			height: 350px;
 		}
 	}
@@ -51,7 +51,7 @@
 	@media screen and (max-width: 480px) {
 		min-width: 260px;
 
-		.news__image {
+		.news-image {
 			height: 250px;
 			min-height: 250px;
 		}

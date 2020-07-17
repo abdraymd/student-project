@@ -5,35 +5,33 @@ import org.springframework.security.core.GrantedAuthority;
 import java.util.Collection;
 
 public class JwtResponse {
-    private String token;
-    private String type = "Bearer";
+    private String accessToken;
+    private String tokenType = "Bearer";
     private String username;
+    private String profileImage;
     private Collection<? extends GrantedAuthority> authorities;
 
-    public JwtResponse(String token, String username, Collection<? extends GrantedAuthority> authorities) {
-        this.token = token;
+    public JwtResponse(String accessToken, String username, String profileImage, Collection<? extends GrantedAuthority> authorities) {
+        this.accessToken = accessToken;
         this.username = username;
+        this.profileImage = profileImage;
         this.authorities = authorities;
     }
 
     public String getAccessToken() {
-        return token;
-    }
-
-    public void setAccessToken(String accessToken) {
-        this.token = accessToken;
+        return accessToken;
     }
 
     public String getTokenType() {
-        return type;
-    }
-
-    public void setTokenType(String tokenType) {
-        this.type = tokenType;
+        return tokenType;
     }
 
     public String getUsername() {
         return username;
+    }
+
+    public String getProfileImage() {
+        return profileImage;
     }
 
     public Collection<? extends GrantedAuthority> getAuthorities() {

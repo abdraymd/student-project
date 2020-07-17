@@ -24,4 +24,16 @@ export class UserService {
 	getUser(username: string): Observable<User> {
 		return this.http.get<User>(`${UserService.url}/${username}`, httpOptions)
 	}
+
+	forgot(email: string): Observable<string> {
+		return this.http.post<string>(`${UserService.url}/password/forgot`, email, httpOptions)
+	}
+
+	reset(token: string, newPassword: string): Observable<any> {
+		return this.http.put<any>(
+			`${UserService.url}/password/reset/${token}`,
+			newPassword,
+			httpOptions
+		)
+	}
 }

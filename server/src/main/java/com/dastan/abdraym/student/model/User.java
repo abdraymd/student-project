@@ -46,6 +46,8 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
+    private String profileImage;
+
     private String resetToken;
 
     public User() {
@@ -115,6 +117,14 @@ public class User {
         this.roles = roles;
     }
 
+    public String getProfileImage() {
+        return profileImage;
+    }
+
+    public void setProfileImage(String profileImage) {
+        this.profileImage = profileImage;
+    }
+
     public String getResetToken() {
         return resetToken;
     }
@@ -133,6 +143,7 @@ public class User {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", roles=" + roles +
+                ", profileImage='" + profileImage + '\'' +
                 ", resetToken='" + resetToken + '\'' +
                 '}';
     }

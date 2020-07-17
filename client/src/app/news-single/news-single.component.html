@@ -11,8 +11,8 @@
 
 		<div class="news">
 			<div
-				class="news__image"
-				[ngStyle]="{ 'background-image': 'url(' + imgUrl + news.imageName + ')' }"
+				class="news-image"
+				[style.backgroundImage]="'url(' + imgUrl + news.imageName + ')'"
 			></div>
 			<h3>{{ news.title }}</h3>
 			<p>{{ news.text }}</p>

@@ -2,7 +2,7 @@ package com.dastan.abdraym.student.controller;
 
 import com.dastan.abdraym.student.model.Question;
 import com.dastan.abdraym.student.model.Quiz;
-import com.dastan.abdraym.student.report.response.ResponseReport;
+import com.dastan.abdraym.student.report.response.Response;
 import com.dastan.abdraym.student.repository.QuestionRepository;
 import com.dastan.abdraym.student.repository.QuizRepository;
 import org.springframework.http.HttpStatus;
@@ -56,7 +56,7 @@ public class QuizController {
         question.setQuiz(quiz);
         questionRepository.save(question);
 
-        return new ResponseEntity<>(new ResponseReport("Question added successfully!"), HttpStatus.OK);
+        return new ResponseEntity<>(new Response("Question added successfully!"), HttpStatus.OK);
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")

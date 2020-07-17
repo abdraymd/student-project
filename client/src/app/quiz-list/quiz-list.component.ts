@@ -56,20 +56,19 @@ export class QuizListComponent implements OnInit {
 	}
 
 	onScroll() {
-		if (this.scrollingQuizzes.length === this.quizzes.length) {
-			this.isSpinning = false
-			return
-		}
+		if (this.scrollingQuizzes.length === this.quizzes.length) return
 
 		this.isSpinning = true
 
-		this.scrollingQuizzes = this.scrollingQuizzes.concat(
-			this.quizzes.slice(this.scrollValue, this.scrollValue + 4)
-		)
+		this.scrollingQuizzes = this.scrollingQuizzes.concat(this.sliceQuizzes())
 
 		this.isSpinning = false
 
 		this.scrollValue += 4
+	}
+
+	sliceQuizzes() {
+		return this.quizzes.slice(this.scrollValue, this.scrollValue + 4)
 	}
 
 	slideOnWidth() {
@@ -113,6 +112,10 @@ export class QuizListComponent implements OnInit {
 	deleteQuiz(quiz: Quiz) {
 		this.quizService.deleteQuiz(quiz.id).subscribe(() => {
 			this.quizzes = this.quizzes.filter(q => q.id !== quiz.id)
+
+			this.scrollValue = 0
+			this.scrollingQuizzes = this.sliceQuizzes()
+			this.scrollValue += 4
 		})
 	}
 }

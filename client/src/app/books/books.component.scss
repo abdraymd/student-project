@@ -7,7 +7,7 @@
 	cursor: pointer;
 
 	&:hover {
-		.book-l__image {
+		.book-l-image {
 			transform: translateY(-7px);
 		}
 	}
@@ -20,7 +20,7 @@
 		font-weight: 700;
 	}
 
-	.book-l__image {
+	.book-l-image {
 		margin: 0 auto;
 		background-color: #f1f1f1;
 		height: 240px;

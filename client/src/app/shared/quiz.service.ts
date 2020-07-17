@@ -3,6 +3,13 @@ import { HttpClient } from '@angular/common/http'
 import { Observable, Subject } from 'rxjs'
 import { httpOptions } from './options'
 
+export const QUIZ_ID_KEY = 'quizId'
+export const QUIZ_NAME_KEY = 'quizName'
+export const SECONDS_KEY = 'seconds'
+export const PROGRESS_KEY = 'progress'
+export const QUESTIONS_KEY = 'questions'
+export const USER_ANSWERS_KEY = 'userAnswers'
+
 export interface Quiz {
 	id?: number
 	name: string

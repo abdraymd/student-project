@@ -56,20 +56,19 @@ export class NewsComponent implements OnInit {
 	}
 
 	onScroll() {
-		if (this.scrollingNews.length === this.news.length) {
-			this.isSpinning = false
-			return
-		}
+		if (this.scrollingNews.length === this.news.length) return
 
 		this.isSpinning = true
 
-		this.scrollingNews = this.scrollingNews.concat(
-			this.news.slice(this.scrollValue, this.scrollValue + 4)
-		)
+		this.scrollingNews = this.scrollingNews.concat(this.sliceNews())
 
 		this.isSpinning = false
 
 		this.scrollValue += 4
+	}
+
+	sliceNews() {
+		return this.news.slice(this.scrollValue, this.scrollValue + 4)
 	}
 
 	slideOnWidth() {
@@ -97,6 +96,10 @@ export class NewsComponent implements OnInit {
 	deleteNews(news: News) {
 		this.newsService.delete(news).subscribe(() => {
 			this.news = this.news.filter(n => n.id !== news.id)
+
+			this.scrollValue = 0
+			this.scrollingNews = this.sliceNews()
+			this.scrollValue += 4
 		})
 	}
 
