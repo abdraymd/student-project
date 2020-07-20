@@ -1,11 +1,4 @@
-<!-- sidebar -->
-<app-sidebar></app-sidebar>
-
-<main [class.slide]="shouldSlide">
-	<!-- toolbar -->
-	<app-toolbar></app-toolbar>
-
-	<!-- content -->
+<main-section>
 	<section class="section">
 		<h1 class="header">Библиотека</h1>
 
@@ -22,15 +15,15 @@
 			[infiniteScrollContainer]="'body'"
 			(scrolled)="onScroll()"
 		>
-			<div class="raw-wrapper" *ngFor="let book of scrollingBooks">
+			<div class="books-l-wrapper" *ngFor="let book of scrollingBooks">
 				<div class="book-l" (click)="toOneBook(book.id)">
-					<h3>{{ book.name }}</h3>
+					<h3 class="header-3">{{ book.name }}</h3>
 					<div
-						class="book-l-image"
+						class="book-l__image"
 						[style.backgroundImage]="'url(' + imgUrl + book.imageName + ')'"
 					></div>
-					<p><span>Жанр:</span> {{ book.genre }}</p>
-					<p><span>Автор:</span> {{ book.author }}</p>
+					<p class="paragraph"><span>Жанр:</span> {{ book.genre }}</p>
+					<p class="paragraph"><span>Автор:</span> {{ book.author }}</p>
 				</div>
 				<mat-icon
 					class="btn-close"
@@ -44,6 +37,6 @@
 		</div>
 
 		<!-- spinner -->
-		<app-spinner *ngIf="isSpinning"></app-spinner>
+		<spinner *ngIf="isSpinning"></spinner>
 	</section>
-</main>
+</main-section>

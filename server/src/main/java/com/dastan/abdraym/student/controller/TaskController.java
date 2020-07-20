@@ -24,10 +24,10 @@ public class TaskController {
         this.userRepository = userRepository;
     }
 
-    @GetMapping("/{username}")
-    public ResponseEntity<?> getTasks(@PathVariable String username, @RequestParam String date) {
-        User user = userRepository.findByUsername(username).orElseThrow(
-                () -> new UsernameNotFoundException("User not found with -> username: " + username));
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getTasks(@PathVariable Long id, @RequestParam String date) {
+        User user = userRepository.findById(id).orElseThrow(
+                () -> new UsernameNotFoundException("User not found with -> id: " + id));
 
         List<Task> tasks = taskRepository.findAllByUser(user);
         List<Task> result = new ArrayList<>();

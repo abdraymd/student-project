@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core'
 import { MatDialogRef } from '@angular/material'
-import { BookService } from '../shared/book.service'
+import { BookService } from '../shared/services/book.service'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 
 @Component({
-	selector: 'app-books-create',
+	selector: 'books-create',
 	templateUrl: './books-create.component.html',
 	styleUrls: ['./books-create.component.scss']
 })

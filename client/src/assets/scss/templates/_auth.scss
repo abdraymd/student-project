@@ -1,0 +1,49 @@
+.auth {
+	padding: 50px 30px 25px 30px;
+	width: 500px;
+	margin: 100px auto;
+	@include block;
+
+	h1 {
+		text-align: center;
+	}
+
+	button {
+		width: 100%;
+		margin-bottom: 0;
+	}
+
+	.text-link {
+		text-align: center;
+		margin-top: 15px;
+	}
+
+	@media screen and (max-width: 500px) {
+		width: 90%;
+	}
+}
+
+.form-group {
+	margin-bottom: 15px;
+
+	p {
+		margin-left: 12px;
+	}
+}
+
+.success {
+	margin-bottom: 10px;
+
+	p {
+		margin-left: 12px;
+		color: $darkColor;
+	}
+}
+
+.warning {
+	margin-bottom: 10px;
+
+	p {
+		margin-left: 12px;
+	}
+}

@@ -1,44 +1,10 @@
+@import 'utilities/variables';
+@import 'utilities/mixins';
+
 .calendar {
-	width: 500px;
-	background: #fff;
+	width: 100%;
 	padding: 15px 20px 15px 20px;
-	border-radius: 15px;
-
-	.selector {
-		display: flex;
-		align-items: center;
-		justify-content: space-evenly;
-		width: auto;
-		position: relative;
-		padding-bottom: 14px;
-		margin-bottom: 15px;
-
-		h3 {
-			font-size: 1.2rem;
-			color: #252525;
-			font-weight: 700;
-		}
-
-		.btn-select {
-			cursor: pointer;
-			color: #8f8f8f;
-
-			&::selection {
-				color: none;
-				background: none;
-			}
-		}
-
-		&:after {
-			content: '';
-			height: 1px;
-			width: 100%;
-			position: absolute;
-			bottom: 0;
-			left: 0;
-			background: #f1f1f1;
-		}
-	}
+	@include block;
 
 	table {
 		width: 100%;
@@ -53,7 +19,7 @@
 		th {
 			font-size: 1.1rem;
 			font-weight: 400;
-			color: #7d7d7d;
+			color: $greyColor;
 		}
 
 		td {
@@ -61,7 +27,11 @@
 			transition: all 0.2s;
 			font-size: 1.2rem;
 			font-weight: 500;
-			color: #252525;
+			color: $darkColor;
+
+			.selected {
+				color: $blueColor;
+			}
 
 			&.disabled {
 				pointer-events: none;
@@ -72,26 +42,44 @@
 				background: #f1f1f1;
 				cursor: pointer;
 			}
-
-			.selected {
-				color: #4f81e3;
-			}
 		}
 	}
 
-	@media screen and (max-width: 480px) {
-		width: 310px;
-
+	@media screen and (max-width: 900px) {
 		table {
 			height: 240px;
 		}
 	}
 
-	@media screen and (max-width: 320px) {
-		width: 260px;
-
+	@media screen and (max-width: 740px) {
 		table {
-			height: 200px;
+			height: 280px;
 		}
 	}
+
+	@media screen and (max-width: 440px) {
+		table {
+			height: 240px;
+		}
+	}
+}
+
+.selector {
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	width: auto;
+	padding-bottom: 14px;
+	margin-bottom: 15px;
+	@include block-line;
+
+	h3 {
+		font-size: 1.2rem;
+	}
+}
+
+.selector__button {
+	cursor: pointer;
+	color: #8f8f8f;
+	@include icon;
 }

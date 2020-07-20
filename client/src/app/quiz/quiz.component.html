@@ -1,11 +1,4 @@
-<!-- sidebar -->
-<app-sidebar></app-sidebar>
-
-<main [class.slide]="shouldSlide">
-	<!-- toolbar -->
-	<app-toolbar></app-toolbar>
-
-	<!-- content -->
+<main-section>
 	<section class="section">
 		<h1 class="header">Тест: {{ quizService.quizName }}</h1>
 
@@ -13,11 +6,11 @@
 			class="question"
 			*ngIf="quizService.questions && quizService.progress != quizService.questions.length"
 		>
-			<p>
+			<p class="paragraph">
 				<span>Текущее время:</span>
 				{{ quizService.displayTimeElapsed() }}
 			</p>
-			<h3>Вопрос {{ quizService.progress + 1 }}</h3>
+			<h3 class="header-3">Вопрос {{ quizService.progress + 1 }}</h3>
 			<p>{{ quizService.questions[quizService.progress].question }}</p>
 
 			<ul>
@@ -40,4 +33,4 @@
 			</ul>
 		</div>
 	</section>
-</main>
+</main-section>

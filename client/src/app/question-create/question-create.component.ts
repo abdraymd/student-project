@@ -1,10 +1,10 @@
 import { Component, OnInit, Inject } from '@angular/core'
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material'
-import { QuizService, Question } from '../shared/quiz.service'
+import { QuizService, Question } from '../shared/services/quiz.service'
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 
 @Component({
-	selector: 'app-question-create',
+	selector: 'question-create',
 	templateUrl: './question-create.component.html',
 	styleUrls: ['./question-create.component.scss']
 })

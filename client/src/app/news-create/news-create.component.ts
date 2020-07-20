@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core'
 import { MatDialogRef } from '@angular/material'
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
-import { NewsService } from '../shared/news.service'
-import { DateService } from '../shared/date.service'
+import { NewsService } from '../shared/services/news.service'
+import { DateService } from '../shared/services/date.service'
 
 @Component({
-	selector: 'app-news-create',
+	selector: 'news-create',
 	templateUrl: './news-create.component.html',
 	styleUrls: ['./news-create.component.scss']
 })

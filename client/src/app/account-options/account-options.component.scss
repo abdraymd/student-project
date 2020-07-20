@@ -1,0 +1,45 @@
+@import 'utilities/variables';
+
+.account-options {
+	padding: 20px;
+}
+
+.account-options-email {
+	max-width: 320px;
+	width: 100%;
+	margin-bottom: 40px;
+
+	label {
+		font-weight: 700;
+		font-size: 0.9rem;
+		color: $darkColor;
+		margin-left: 12px;
+	}
+
+	p {
+		margin-top: 10px;
+		margin-left: 12px;
+	}
+
+	button {
+		margin-top: 10px;
+		width: 100%;
+		margin-bottom: 0;
+	}
+}
+
+.account-options-password {
+	max-width: 320px;
+
+	p {
+		margin-left: 12px;
+		margin-bottom: 10px;
+	}
+
+	button {
+		width: 100%;
+		margin-bottom: 0;
+		background: #e8e8e8;
+		color: #303030;
+	}
+}

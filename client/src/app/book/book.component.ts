@@ -1,19 +1,17 @@
-import { Component, OnInit, HostListener } from '@angular/core'
-import { Book, BookService } from '../shared/book.service'
+import { Component, OnInit } from '@angular/core'
+import { Book, BookService } from '../shared/services/book.service'
 import { ActivatedRoute } from '@angular/router'
 import { Title } from '@angular/platform-browser'
 import { saveAs } from 'file-saver'
 
 @Component({
-	selector: 'app-book',
+	selector: 'book',
 	templateUrl: './book.component.html',
 	styleUrls: ['./book.component.scss']
 })
 export class BookComponent implements OnInit {
 	id: number
 	book: Book
-	shouldSlide: boolean
-	innerWidth: any
 
 	constructor(
 		private bookService: BookService,
@@ -22,21 +20,8 @@ export class BookComponent implements OnInit {
 	) {}
 
 	ngOnInit() {
-		this.slideOnWidth()
-
 		this.id = this.activatedRoute.snapshot.params['id']
 		this.getBook(this.id)
-	}
-
-	slideOnWidth() {
-		this.innerWidth = window.innerWidth
-		if (this.innerWidth <= 768) this.shouldSlide = false
-		else this.shouldSlide = true
-	}
-
-	@HostListener('window:resize', ['$event'])
-	onResize(event: Event) {
-		this.slideOnWidth()
 	}
 
 	getBook(id: number) {

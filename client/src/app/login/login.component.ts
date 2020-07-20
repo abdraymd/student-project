@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core'
-import { SignInInfo } from '../report/request/signin-info'
-import { AuthService } from '../auth/auth.service'
-import { TokenService } from '../auth/token.service'
+import { LoginRequest } from '../shared/reports/requests/login-request'
+import { AuthService } from '../shared/services/auth.service'
+import { TokenService } from '../shared/services/token.service'
 import { Router } from '@angular/router'
 import { FormGroup, Validators, FormBuilder } from '@angular/forms'
 
 @Component({
-	selector: 'app-login',
+	selector: 'login',
 	templateUrl: './login.component.html',
 	styleUrls: ['./login.component.scss']
 })
@@ -34,12 +34,12 @@ export class LoginComponent implements OnInit {
 	}
 
 	onSubmit() {
-		const loginInfo = new SignInInfo(this.username.value, this.password.value)
+		const loginRequest = new LoginRequest(this.username.value, this.password.value)
 
-		this.authService.signIn(loginInfo).subscribe(
+		this.authService.signIn(loginRequest).subscribe(
 			data => {
 				this.token.saveToken(data.accessToken)
-				this.token.saveUsername(data.username)
+				this.token.saveUserId(data.userId)
 
 				if (data.profileImage) this.token.saveAvatar(data.profileImage)
 				else this.token.saveAvatar('')

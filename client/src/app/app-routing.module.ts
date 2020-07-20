@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core'
 import { Routes, RouterModule } from '@angular/router'
-import { AuthGuard } from './auth/auth-guard'
+import { AuthGuard } from './shared/auth/auth-guard'
 import { LoginComponent } from './login/login.component'
 import { RegisterComponent } from './register/register.component'
 import { ScheduleComponent } from './schedule/schedule.component'
@@ -14,6 +14,7 @@ import { BookComponent } from './book/book.component'
 import { NewsSingleComponent } from './news-single/news-single.component'
 import { PasswordForgotComponent } from './password-forgot/password-forgot.component'
 import { PasswordResetComponent } from './password-reset/password-reset.component'
+import { SettingsComponent } from './settings/settings.component'
 
 const routes: Routes = [
 	{ path: 'signin', component: LoginComponent },
@@ -29,6 +30,7 @@ const routes: Routes = [
 	{ path: 'result', component: ResultComponent, canActivate: [AuthGuard] },
 	{ path: 'books', component: BooksComponent, canActivate: [AuthGuard] },
 	{ path: 'books/:id', component: BookComponent, canActivate: [AuthGuard] },
+	{ path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
 	{ path: '', redirectTo: 'news', pathMatch: 'full' }
 ]
 

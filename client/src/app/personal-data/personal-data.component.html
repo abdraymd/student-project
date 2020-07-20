@@ -1,0 +1,67 @@
+<div class="personal-data">
+	<div
+		class="personal-data-image"
+		[style.backgroundImage]="user.profileImage ? 'url(' + avatarUrl + ')' : defaultAvatar"
+		(click)="uploader.click()"
+	>
+		<div class="personal-data-image__overlay"></div>
+		<input type="file" #uploader (change)="updateAvatar($event)" hidden />
+		<mat-icon>add</mat-icon>
+	</div>
+
+	<form
+		[formGroup]="formGroup"
+		class="personal-data-form"
+		(ngSubmit)="formGroup.valid && onSubmit()"
+	>
+		<div class="personal-data-form__input">
+			<label>Имя пользователя</label>
+			<input
+				type="text"
+				class="input-text"
+				placeholder="Имя пользователя"
+				formControlName="username"
+				[class.invalid]="username.invalid"
+			/>
+			<p *ngIf="username.errors?.minlength" class="text-warning">
+				Имя пользователя не должно быть короче 3 символов
+			</p>
+		</div>
+
+		<div class="personal-data-form__input">
+			<label>Имя</label>
+			<input
+				type="text"
+				class="input-text"
+				placeholder="Имя"
+				formControlName="name"
+				[class.invalid]="name.invalid"
+			/>
+			<p *ngIf="name.errors?.minlength" class="text-warning">
+				Имя не должно быть короче 3 символов
+			</p>
+		</div>
+
+		<div class="personal-data-form__input">
+			<label>Фамилия</label>
+			<input
+				type="text"
+				class="input-text"
+				placeholder="Фамилия"
+				formControlName="surname"
+				[class.invalid]="surname.invalid"
+			/>
+			<p *ngIf="surname.errors?.minlength" class="text-warning">
+				Фамилия не должна быть короче 3 символов
+			</p>
+		</div>
+
+		<p class="text-warning" *ngIf="submitFailed">
+			Имя пользователя уже занято
+		</p>
+
+		<button type="submit" class="btn-block" [disabled]="formGroup.invalid">
+			Редактировать
+		</button>
+	</form>
+</div>

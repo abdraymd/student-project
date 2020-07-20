@@ -1,21 +1,19 @@
-import { Component, OnInit, HostListener } from '@angular/core'
-import { QuizService, Quiz } from '../shared/quiz.service'
+import { Component, OnInit } from '@angular/core'
+import { QuizService, Quiz } from '../shared/services/quiz.service'
 import { MatDialog, MatDialogConfig } from '@angular/material'
 import { QuizCreateComponent } from '../quiz-create/quiz-create.component'
-import { TokenService } from '../auth/token.service'
+import { TokenService } from '../shared/services/token.service'
 import { Title } from '@angular/platform-browser'
 import { Router } from '@angular/router'
 
 @Component({
-	selector: 'app-quiz-list',
+	selector: 'quiz-list',
 	templateUrl: './quiz-list.component.html',
 	styleUrls: ['./quiz-list.component.scss']
 })
 export class QuizListComponent implements OnInit {
 	quizzes: Quiz[] = []
 	authority: string
-	shouldSlide: boolean
-	innerWidth: any
 	scrollingQuizzes: Quiz[] = []
 	scrollValue: number = 0
 	isSpinning: boolean = false
@@ -37,8 +35,6 @@ export class QuizListComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		this.slideOnWidth()
-
 		if (this.token.getToken()) {
 			const roles = this.token.getAuthorities()
 			roles.every(role => {
@@ -69,17 +65,6 @@ export class QuizListComponent implements OnInit {
 
 	sliceQuizzes() {
 		return this.quizzes.slice(this.scrollValue, this.scrollValue + 4)
-	}
-
-	slideOnWidth() {
-		this.innerWidth = window.innerWidth
-		if (this.innerWidth <= 768) this.shouldSlide = false
-		else this.shouldSlide = true
-	}
-
-	@HostListener('window:resize', ['$event'])
-	onResize(event: Event) {
-		this.slideOnWidth()
 	}
 
 	getAllQuizzes() {

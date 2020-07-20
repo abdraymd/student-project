@@ -1,0 +1,36 @@
+<div class="account-options">
+	<div class="account-options-email">
+		<label>Почта</label>
+		<input
+			type="email"
+			class="input-text"
+			placeholder="Почта"
+			[(ngModel)]="userEmail"
+			#email="ngModel"
+			required
+			minlength="3"
+			email
+			[class.invalid]="email.invalid"
+		/>
+		<p *ngIf="email.errors?.minlength" class="text-warning">
+			Почта не должна быть короче 3 символов
+		</p>
+		<p *ngIf="email.errors?.email" class="text-warning">
+			Некорректная запись почты
+		</p>
+
+		<div *ngIf="emailUpdated">
+			<p>Почта была успешно обновлена</p>
+		</div>
+
+		<button class="btn-block" (click)="updateEmail()">Обновить</button>
+	</div>
+
+	<div class="account-options-password">
+		<div *ngIf="passwordUpdated">
+			<p>Пароль был успешно изменен</p>
+		</div>
+
+		<button class="btn-block" (click)="onPasswordChange()">Изменить пароль</button>
+	</div>
+</div>

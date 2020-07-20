@@ -1,0 +1,8 @@
+main {
+	padding-left: 0;
+	transition: all 0.3s linear;
+
+	&.slide {
+		padding-left: 250px;
+	}
+}

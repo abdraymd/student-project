@@ -1,0 +1,20 @@
+<main-section>
+	<section class="section" *ngIf="user">
+		<h1 class="header">Настройки</h1>
+
+		<!-- tabs -->
+		<div class="settings">
+			<tabs>
+				<!-- personal data -->
+				<tab tabTitle="Личные данные">
+					<personal-data [user]="user"></personal-data>
+				</tab>
+
+				<!-- settings -->
+				<tab tabTitle="Настройки">
+					<account-options [userEmail]="user.email"></account-options>
+				</tab>
+			</tabs>
+		</div>
+	</section>
+</main-section>

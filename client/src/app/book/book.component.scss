@@ -1,48 +1,27 @@
+@import 'utilities/mixins';
+
 .book {
 	display: flex;
 	justify-content: space-between;
-	width: 880px;
-	background: #fff;
-	padding: 20px 30px 20px 30px;
-	border-radius: 15px;
+	@include block;
+	@include block-large;
 
 	h3 {
-		font-size: 1rem;
-		color: #252525;
-		font-weight: 700;
 		margin-bottom: 12px;
 	}
 
 	p {
 		max-width: 540px;
-		font-size: 15px;
-		font-weight: 400;
-		color: #7d7d7d;
 		margin-bottom: 8px;
 
 		&#descr {
+			@include text;
 			margin-bottom: 13px;
-		}
-
-		span {
-			color: #252525;
-			font-weight: 500;
 		}
 	}
 
 	button {
 		margin-bottom: 0;
-	}
-
-	.book-image {
-		background-color: #f1f1f1;
-		height: 340px;
-		min-height: 340px;
-		min-width: 226px;
-		margin-left: 30px;
-		background-position: center;
-		background-repeat: no-repeat;
-		background-size: cover;
 	}
 
 	@media screen and (max-width: 1230px) {
@@ -64,12 +43,6 @@
 		button {
 			margin: 0 auto;
 		}
-
-		.book-image {
-			max-height: 340px;
-			max-width: 226px;
-			margin: 0 auto;
-		}
 	}
 
 	@media screen and (max-width: 480px) {
@@ -81,11 +54,24 @@
 	@media screen and (max-width: 320px) {
 		min-width: 260px;
 		padding: 15px 20px 15px 20px;
+	}
+}
 
-		.book-image {
-			max-height: 240px;
-			max-width: 160px;
-			margin: 0 auto;
-		}
+.book__image {
+	height: 340px;
+	min-height: 340px;
+	min-width: 226px;
+	margin-left: 30px;
+	@include background;
+
+	@media screen and (max-width: 1030px) {
+		max-height: 340px;
+		max-width: 226px;
+		margin: 0 auto;
+	}
+
+	@media screen and (max-width: 320px) {
+		max-height: 240px;
+		max-width: 160px;
 	}
 }

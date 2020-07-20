@@ -1,0 +1,139 @@
+// text
+.header {
+	color: $darkColor;
+	font-size: 1.4rem;
+	font-weight: 700;
+	margin-bottom: 20px;
+}
+
+.header-3 {
+	font-size: 1rem;
+	color: $darkColor;
+	font-weight: 700;
+}
+
+.paragraph {
+	@include text;
+
+	span {
+		@include span;
+	}
+}
+
+.text-warning {
+	font-size: 0.9rem;
+	color: $redColor;
+	font-weight: 400;
+}
+
+.text-link {
+	font-size: 15px;
+	color: $darkColor;
+}
+
+.link {
+	color: $blueColor;
+	transition: opacity 0.1s linear;
+
+	&:hover {
+		opacity: 0.8;
+	}
+}
+
+// button
+.btn-icon {
+	cursor: pointer;
+	font-size: 1.3rem;
+	color: $darkColor;
+	@include icon;
+}
+
+.btn-close {
+	cursor: pointer;
+	color: $darkColor;
+	@include icon;
+}
+
+.btn-block {
+	display: block;
+	width: 200px;
+	background: $blueColor;
+	color: #fff;
+	margin-bottom: 20px;
+	@include btn;
+
+	&:disabled {
+		opacity: 0.4;
+	}
+}
+
+// input
+.input-text {
+	height: 44px;
+	@include input;
+}
+
+.textarea {
+	resize: none;
+	@include input;
+}
+
+.input-file {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+
+	+ label {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+		background: #e8e8e8;
+		color: #303030;
+		cursor: pointer;
+		@include btn;
+
+		mat-icon {
+			margin-right: 10px;
+			@include icon;
+		}
+	}
+}
+
+.invalid {
+	&::placeholder {
+		color: $redColor;
+	}
+}
+
+// wrapper
+.section {
+	margin: 30px 50px;
+
+	@media screen and (max-width: 480px) {
+		margin: 30px 30px;
+	}
+}
+
+.wrapper {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+.column-wrapper {
+	display: flex;
+	flex-direction: column;
+}
+
+// icon
+.correct {
+	color: #3ec75e;
+}
+
+.incorrect {
+	color: $redColor;
+}

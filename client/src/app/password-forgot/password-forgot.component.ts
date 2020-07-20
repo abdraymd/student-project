@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core'
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
-import { UserService } from '../shared/user.service'
+import { UserService } from '../shared/services/user.service'
 
 @Component({
-	selector: 'app-password-forgot',
+	selector: 'password-forgot',
 	templateUrl: './password-forgot.component.html',
 	styleUrls: ['./password-forgot.component.scss']
 })

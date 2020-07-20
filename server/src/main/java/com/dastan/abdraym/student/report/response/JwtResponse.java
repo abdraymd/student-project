@@ -7,13 +7,13 @@ import java.util.Collection;
 public class JwtResponse {
     private String accessToken;
     private String tokenType = "Bearer";
-    private String username;
+    private Long userId;
     private String profileImage;
     private Collection<? extends GrantedAuthority> authorities;
 
-    public JwtResponse(String accessToken, String username, String profileImage, Collection<? extends GrantedAuthority> authorities) {
+    public JwtResponse(String accessToken, Long userId, String profileImage, Collection<? extends GrantedAuthority> authorities) {
         this.accessToken = accessToken;
-        this.username = username;
+        this.userId = userId;
         this.profileImage = profileImage;
         this.authorities = authorities;
     }
@@ -26,8 +26,8 @@ public class JwtResponse {
         return tokenType;
     }
 
-    public String getUsername() {
-        return username;
+    public Long getUserId() {
+        return userId;
     }
 
     public String getProfileImage() {

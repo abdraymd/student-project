@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core'
-import { DateService } from '../shared/date.service'
+import { DateService } from '../shared/services/date.service'
 import { FormGroup, Validators, FormBuilder, FormGroupDirective } from '@angular/forms'
-import { TaskService, Task } from '../shared/task.service'
-import { TokenService } from '../auth/token.service'
-import { User, UserService } from '../shared/user.service'
+import { TaskService, Task } from '../shared/services/task.service'
+import { TokenService } from '../shared/services/token.service'
+import { User, UserService } from '../shared/services/user.service'
 import { switchMap } from 'rxjs/operators'
 
 @Component({
-	selector: 'app-organizer',
+	selector: 'organizer',
 	templateUrl: './organizer.component.html',
 	styleUrls: ['./organizer.component.scss']
 })
 export class OrganizerComponent implements OnInit {
-	username: string
+	userId: number
 	userInfo: User
 	tasks: Task[] = []
 	formGroup: FormGroup
@@ -26,11 +26,11 @@ export class OrganizerComponent implements OnInit {
 	) {}
 
 	ngOnInit() {
-		this.username = this.token.getUsername()
-		this.getUser(this.username)
+		this.userId = parseInt(this.token.getUserId())
+		this.getUser(this.userId)
 
 		this.dateService.date
-			.pipe(switchMap(value => this.taskService.load(this.username, value)))
+			.pipe(switchMap(value => this.taskService.load(this.userId, value)))
 			.subscribe(tasks => {
 				this.tasks = tasks
 			})
@@ -61,8 +61,8 @@ export class OrganizerComponent implements OnInit {
 		)
 	}
 
-	getUser(username: string) {
-		this.userService.getUser(username).subscribe(response => {
+	getUser(userId: number) {
+		this.userService.getUser(userId).subscribe(response => {
 			this.userInfo = response
 		})
 	}

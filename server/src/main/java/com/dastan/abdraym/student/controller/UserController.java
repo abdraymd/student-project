@@ -2,7 +2,8 @@ package com.dastan.abdraym.student.controller;
 
 import com.dastan.abdraym.student.mail.MailSender;
 import com.dastan.abdraym.student.model.User;
-import com.dastan.abdraym.student.report.request.PasswordRequest;
+import com.dastan.abdraym.student.report.request.PasswordForm;
+import com.dastan.abdraym.student.report.request.PersonalDataForm;
 import com.dastan.abdraym.student.report.response.Response;
 import com.dastan.abdraym.student.repository.UserRepository;
 import com.dastan.abdraym.student.service.FileService;
@@ -33,9 +34,9 @@ public class UserController {
         this.mailSender = mailSender;
     }
 
-    @GetMapping("/{username}")
-    public ResponseEntity<User> getUser(@PathVariable String username) {
-        return userRepository.findByUsername(username)
+    @GetMapping("/{id}")
+    public ResponseEntity<User> getUser(@PathVariable Long id) {
+        return userRepository.findById(id)
                 .map(record -> ResponseEntity.ok().body(record))
                 .orElse(ResponseEntity.notFound().build());
     }
@@ -56,13 +57,44 @@ public class UserController {
         return ResponseEntity.ok().body(userRepository.save(user));
     }
 
-    @PutMapping("/{id}/password")
-    public ResponseEntity<?> updatePassword(@PathVariable Long id, @Valid @RequestBody PasswordRequest passwordRequest) {
+    @PutMapping("/{id}/personal-data")
+    public ResponseEntity<?> updatePersonalData(@PathVariable Long id, @Valid @RequestBody PersonalDataForm personalDataForm) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Fail! -> User not found!"));
 
-        if (passwordEncoder.matches(passwordRequest.getPassword(), user.getPassword())) {
-            user.setPassword(passwordEncoder.encode(passwordRequest.getNewPassword()));
+        if (userRepository.existsByUsername(personalDataForm.getUsername())) {
+            return new ResponseEntity<>(new Response("Fail -> Username is already taken!"), HttpStatus.BAD_REQUEST);
+        }
+
+        user.setUsername(personalDataForm.getUsername());
+        user.setName(personalDataForm.getName());
+        user.setSurname(personalDataForm.getSurname());
+        userRepository.save(user);
+
+        return ResponseEntity.ok().body(userRepository.save(user));
+    }
+
+    @PutMapping("/{id}/email")
+    public ResponseEntity<?> updateEmail(@PathVariable Long id, @RequestBody String newEmail) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Fail! -> User not found!"));
+
+        if (userRepository.existsByEmail(newEmail)) {
+            return new ResponseEntity<>(new Response("Fail -> Username is already taken!"), HttpStatus.BAD_REQUEST);
+        }
+
+        user.setEmail(newEmail);
+
+        return ResponseEntity.ok().body(userRepository.save(user));
+    }
+
+    @PutMapping("/{id}/password")
+    public ResponseEntity<?> updatePassword(@PathVariable Long id, @Valid @RequestBody PasswordForm passwordForm) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Fail! -> User not found!"));
+
+        if (passwordEncoder.matches(passwordForm.getPassword(), user.getPassword())) {
+            user.setPassword(passwordEncoder.encode(passwordForm.getNewPassword()));
 
             return ResponseEntity.ok().body(userRepository.save(user));
         }

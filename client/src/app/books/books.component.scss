@@ -1,13 +1,48 @@
+@import 'utilities/mixins';
+
+button {
+	@media screen and (max-width: 480px) {
+		width: calc(100% - 32px);
+	}
+}
+
+.books-l-wrapper {
+	flex: 0 0 calc(25% - 20px);
+	height: 360px;
+	@include flexRow;
+
+	mat-icon {
+		margin-top: 15px;
+		margin-left: 10px;
+	}
+
+	@media screen and (max-width: 1460px) {
+		flex: 0 0 calc(33.3333% - 20px);
+	}
+
+	@media screen and (max-width: 940px) {
+		flex: 0 0 calc(50% - 20px);
+	}
+
+	@media screen and (max-width: 650px) {
+		flex: 0 0 100%;
+		height: 460px;
+	}
+
+	@media screen and (max-width: 340px) {
+		height: 360px;
+	}
+}
+
 .book-l {
-	width: 300px;
-	background: #fafafa;
-	border-radius: 15px;
-	padding-top: 15px;
-	padding-bottom: 10px;
+	width: 100%;
+	height: 100%;
+	padding: 15px 8px 8px 10px;
 	cursor: pointer;
+	@include block;
 
 	&:hover {
-		.book-l-image {
+		.book-l__image {
 			transform: translateY(-7px);
 		}
 	}
@@ -15,44 +50,50 @@
 	h3 {
 		margin-bottom: 12px;
 		text-align: center;
-		font-size: 1rem;
-		color: #252525;
-		font-weight: 700;
-	}
-
-	.book-l-image {
-		margin: 0 auto;
-		background-color: #f1f1f1;
-		height: 240px;
-		width: 160px;
-		background-position: center;
-		background-repeat: no-repeat;
-		background-size: cover;
-		margin-bottom: 10px;
-		transition: all 0.3s linear;
 	}
 
 	p {
 		text-align: center;
 		font-size: 0.9rem;
-		font-weight: 400;
-		color: #747c82;
 
 		&:last-child {
 			margin-bottom: 0;
 		}
+	}
 
-		span {
-			color: #252525;
-			font-weight: 500;
+	@media screen and (max-width: 650px) {
+		height: 460px;
+		padding-bottom: 0;
+
+		p {
+			font-size: 15px;
 		}
 	}
 
-	@media screen and (max-width: 1030px) {
-		width: 280px;
+	@media screen and (max-width: 340px) {
+		height: 360px;
+
+		p {
+			font-size: 0.9rem;
+		}
+	}
+}
+
+.book-l__image {
+	height: 240px;
+	width: 160px;
+	margin: 0 auto;
+	margin-bottom: 10px;
+	transition: all 0.3s ease-in;
+	@include background;
+
+	@media screen and (max-width: 650px) {
+		height: 336px;
+		width: 224px;
 	}
 
-	@media screen and (max-width: 320px) {
-		width: 240px;
+	@media screen and (max-width: 340px) {
+		height: 240px;
+		width: 160px;
 	}
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import * as moment from 'moment'
-import { DateService } from '../shared/date.service'
+import { DateService } from '../shared/services/date.service'
 
 interface Day {
 	value: moment.Moment
@@ -13,7 +13,7 @@ interface Week {
 }
 
 @Component({
-	selector: 'app-calendar',
+	selector: 'calendar',
 	templateUrl: './calendar.component.html',
 	styleUrls: ['./calendar.component.scss']
 })

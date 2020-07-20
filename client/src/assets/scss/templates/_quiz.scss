@@ -1,0 +1,48 @@
+.quiz-mr {
+	@include block;
+	@include block-large;
+
+	h3 {
+		margin-bottom: 12px;
+	}
+
+	p {
+		margin-bottom: 8px;
+		@include text;
+	}
+
+	button {
+		margin-bottom: 0;
+	}
+
+	@media screen and (max-width: 1230px) {
+		width: 100%;
+	}
+
+	@media screen and (max-width: 480px) {
+		button {
+			width: 100%;
+		}
+	}
+}
+
+.quiz-mr-question {
+	margin-top: 15px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	p {
+		font-size: 15px;
+	}
+}
+
+.quiz-mr-option {
+	display: flex;
+	align-items: flex-start;
+	margin-bottom: 8px;
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+}

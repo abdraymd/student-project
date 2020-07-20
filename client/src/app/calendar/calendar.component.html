@@ -1,14 +1,15 @@
 <div class="calendar">
+	<!-- selector -->
 	<div class="selector">
-		<mat-icon class="btn-select" (click)="goMonth(-1)" title="Прошлый месяц">
+		<mat-icon class="selector__button" (click)="goMonth(-1)" title="Прошлый месяц">
 			arrow_back
 		</mat-icon>
 
-		<h3>
+		<h3 class="header-3">
 			{{ dateService.date | async | moment | date: 'MMM yyyy' | titlecase }}
 		</h3>
 
-		<mat-icon class="btn-select" (click)="goMonth(1)" title="Следующий месяц">
+		<mat-icon class="selector__button" (click)="goMonth(1)" title="Следующий месяц">
 			arrow_forward
 		</mat-icon>
 	</div>

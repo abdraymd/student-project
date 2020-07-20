@@ -1,18 +1,17 @@
-<!-- sidebar -->
-<app-sidebar></app-sidebar>
-
-<main [class.slide]="shouldSlide">
-	<!-- toolbar -->
-	<app-toolbar></app-toolbar>
-
-	<!-- content -->
+<main-section>
 	<section class="section">
 		<h1 class="header">Расписание</h1>
 
 		<div class="schedule">
-			<app-organizer></app-organizer>
+			<!-- organizer -->
+			<div class="organizer">
+				<organizer></organizer>
+			</div>
 
-			<app-calendar></app-calendar>
+			<!-- calendar -->
+			<div class="calendar">
+				<calendar></calendar>
+			</div>
 		</div>
 	</section>
-</main>
+</main-section>

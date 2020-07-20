@@ -1,7 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core'
 
 @Component({
-	selector: 'app-sidebar',
+	selector: 'sidebar',
 	templateUrl: './sidebar.component.html',
 	styleUrls: ['./sidebar.component.scss']
 })
@@ -17,7 +17,7 @@ export class SidebarComponent implements OnInit {
 
 	toggleOnWidth() {
 		this.innerWidth = window.innerWidth
-		if (this.innerWidth <= 768) this.isToggleActive = false
+		if (this.innerWidth <= 1200) this.isToggleActive = false
 		else this.isToggleActive = true
 	}
 
@@ -26,7 +26,7 @@ export class SidebarComponent implements OnInit {
 	}
 
 	closeToggle() {
-		if (this.innerWidth > 768) return
+		if (this.innerWidth > 1200) return
 		this.isToggleActive = false
 	}
 

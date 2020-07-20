@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core'
-import { SignUpInfo } from '../report/request/signup-info'
-import { AuthService } from '../auth/auth.service'
+import { RegistrationRequest } from '../shared/reports/requests/registration-request'
+import { AuthService } from '../shared/services/auth.service'
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
-import { TokenService } from '../auth/token.service'
+import { TokenService } from '../shared/services/token.service'
 import { Title } from '@angular/platform-browser'
-import { SignInInfo } from '../report/request/signin-info'
+import { LoginRequest } from '../shared/reports/requests/login-request'
 import { Router } from '@angular/router'
 
 @Component({
-	selector: 'app-register',
+	selector: 'register',
 	templateUrl: './register.component.html',
 	styleUrls: ['./register.component.scss']
 })
@@ -42,7 +42,7 @@ export class RegisterComponent implements OnInit {
 	}
 
 	onSubmit() {
-		const registerInfo = new SignUpInfo(
+		const registrationRequest = new RegistrationRequest(
 			this.username.value,
 			this.name.value,
 			this.surname.value,
@@ -50,12 +50,15 @@ export class RegisterComponent implements OnInit {
 			this.password.value
 		)
 
-		this.authService.signUp(registerInfo).subscribe(response => {
-			const loginInfo = new SignInInfo(this.username.value, this.password.value)
+		this.authService.signUp(registrationRequest).subscribe(response => {
+			const loginInfo = new LoginRequest(this.username.value, this.password.value)
 			this.authService.signIn(loginInfo).subscribe(
 				data => {
 					this.token.saveToken(data.accessToken)
-					this.token.saveUsername(data.username)
+					this.token.saveUserId(data.userId)
+
+					if (data.profileImage) this.token.saveAvatar(data.profileImage)
+					else this.token.saveAvatar('')
 					this.token.saveAuthorities(data.authorities)
 
 					this.isLoggedIn = true

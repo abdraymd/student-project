@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import {
 	QuizService,
 	QUESTIONS_KEY,
@@ -7,25 +7,21 @@ import {
 	USER_ANSWERS_KEY,
 	QUIZ_ID_KEY,
 	QUIZ_NAME_KEY
-} from '../shared/quiz.service'
+} from '../shared/services/quiz.service'
 import { Router } from '@angular/router'
 import { Title } from '@angular/platform-browser'
 
 @Component({
-	selector: 'app-result',
+	selector: 'result',
 	templateUrl: './result.component.html',
 	styleUrls: ['./result.component.scss']
 })
 export class ResultComponent implements OnInit {
 	condition: boolean = false
-	shouldSlide: boolean
-	innerWidth: any
 
 	constructor(private quizService: QuizService, private router: Router, private title: Title) {}
 
 	ngOnInit() {
-		this.slideOnWidth()
-
 		if (
 			JSON.parse(sessionStorage.getItem(QUESTIONS_KEY)) &&
 			parseInt(sessionStorage.getItem(PROGRESS_KEY)) ==
@@ -51,17 +47,6 @@ export class ResultComponent implements OnInit {
 		} else if (parseInt(sessionStorage.getItem(QUIZ_ID_KEY))) {
 			this.router.navigate(['/quizzes', parseInt(sessionStorage.getItem('quizId'))])
 		}
-	}
-
-	slideOnWidth() {
-		this.innerWidth = window.innerWidth
-		if (this.innerWidth <= 768) this.shouldSlide = false
-		else this.shouldSlide = true
-	}
-
-	@HostListener('window:resize', ['$event'])
-	onResize(event: Event) {
-		this.slideOnWidth()
 	}
 
 	restart() {

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core'
-import { TokenService } from '../auth/token.service'
+import { TokenService } from '../shared/services/token.service'
 import { Router } from '@angular/router'
 
 @Component({
-	selector: 'app-toolbar',
+	selector: 'toolbar',
 	templateUrl: './toolbar.component.html',
 	styleUrls: ['./toolbar.component.scss']
 })
@@ -37,5 +37,9 @@ export class ToolbarComponent implements OnInit {
 	// Getters
 	get avatarUrl() {
 		return 'http://localhost:8080/img/' + this.avatar
+	}
+
+	get defaultAvatar() {
+		return 'url(../../assets/images/avatar.png)'
 	}
 }

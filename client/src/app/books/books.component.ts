@@ -1,21 +1,19 @@
-import { Component, OnInit, HostListener } from '@angular/core'
-import { Book, BookService } from '../shared/book.service'
-import { TokenService } from '../auth/token.service'
+import { Component, OnInit } from '@angular/core'
+import { Book, BookService } from '../shared/services/book.service'
+import { TokenService } from '../shared/services/token.service'
 import { Title } from '@angular/platform-browser'
 import { MatDialog, MatDialogConfig } from '@angular/material'
 import { BooksCreateComponent } from '../books-create/books-create.component'
 import { Router } from '@angular/router'
 
 @Component({
-	selector: 'app-books',
+	selector: 'books',
 	templateUrl: './books.component.html',
 	styleUrls: ['./books.component.scss']
 })
 export class BooksComponent implements OnInit {
 	books: Book[] = []
 	authority: string
-	shouldSlide: boolean
-	innerWidth: any
 	scrollingBooks: Book[] = []
 	scrollValue: number = 0
 	isSpinning: boolean = false
@@ -37,8 +35,6 @@ export class BooksComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		this.slideOnWidth()
-
 		if (this.token.getToken()) {
 			const roles = this.token.getAuthorities()
 			roles.every(role => {
@@ -64,22 +60,11 @@ export class BooksComponent implements OnInit {
 
 		this.isSpinning = false
 
-		this.scrollValue += 6
+		this.scrollValue += 8
 	}
 
 	sliceBooks() {
-		return this.books.slice(this.scrollValue, this.scrollValue + 6)
-	}
-
-	slideOnWidth() {
-		this.innerWidth = window.innerWidth
-		if (this.innerWidth <= 768) this.shouldSlide = false
-		else this.shouldSlide = true
-	}
-
-	@HostListener('window:resize', ['$event'])
-	onResize(event: Event) {
-		this.slideOnWidth()
+		return this.books.slice(this.scrollValue, this.scrollValue + 8)
 	}
 
 	getBooks() {
@@ -89,7 +74,7 @@ export class BooksComponent implements OnInit {
 			})
 
 			this.scrollingBooks = this.sliceBooks()
-			this.scrollValue += 6
+			this.scrollValue += 8
 		})
 	}
 
@@ -99,7 +84,7 @@ export class BooksComponent implements OnInit {
 
 			this.scrollValue = 0
 			this.scrollingBooks = this.sliceBooks()
-			this.scrollValue += 6
+			this.scrollValue += 8
 		})
 	}
 

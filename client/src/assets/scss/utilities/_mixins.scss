@@ -1,0 +1,97 @@
+// background
+@mixin background {
+	background-color: #f1f1f1;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+// text
+@mixin text {
+	font-size: 15px;
+	font-weight: 400;
+	color: #7d7d7d;
+}
+
+@mixin span {
+	color: #252525;
+	font-weight: 500;
+}
+
+// block
+@mixin block {
+	background: #fff;
+	border-radius: 15px;
+}
+
+@mixin block-large {
+	width: 880px;
+	padding: 20px 30px 20px 30px;
+}
+
+@mixin block-line {
+	position: relative;
+
+	&:after {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		height: 1px;
+		width: 100%;
+		background: #f1f1f1;
+	}
+}
+
+// icon
+@mixin icon {
+	&::selection {
+		color: none;
+		background: none;
+	}
+}
+
+// input
+@mixin input {
+	width: 100%;
+	padding: 10px 12px;
+	background: #f9f9f9;
+	border: none;
+	border-radius: 10px;
+	font-family: 'Roboto';
+	font-size: 0.9rem;
+	font-weight: 400;
+	color: #252525;
+	transition: all 0.2s linear;
+
+	&:focus {
+		background: #f1f1f1;
+
+		&::placeholder {
+			color: #7d7d7d;
+		}
+	}
+}
+
+// button
+@mixin btn {
+	height: 44px;
+	padding: 13px;
+	font-size: 0.9rem;
+	font-weight: 700;
+	border: none;
+	border-radius: 10px;
+	transition: opacity 0.2s linear;
+
+	&:hover {
+		opacity: 0.8;
+	}
+}
+
+// wrapper
+@mixin flexRow {
+	display: flex;
+	align-items: flex-start;
+	margin-right: 20px;
+	margin-bottom: 20px;
+}

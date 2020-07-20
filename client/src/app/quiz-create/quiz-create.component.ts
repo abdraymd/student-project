@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core'
 import { MatDialogRef } from '@angular/material'
-import { QuizService, Quiz } from '../shared/quiz.service'
+import { QuizService, Quiz } from '../shared/services/quiz.service'
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 
 @Component({
-	selector: 'app-quiz-create',
+	selector: 'quiz-create',
 	templateUrl: './quiz-create.component.html',
 	styleUrls: ['./quiz-create.component.scss']
 })

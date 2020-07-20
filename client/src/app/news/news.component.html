@@ -1,11 +1,4 @@
-<!-- sidebar -->
-<app-sidebar></app-sidebar>
-
-<main [class.slide]="shouldSlide">
-	<!-- toolbar -->
-	<app-toolbar></app-toolbar>
-
-	<!-- content -->
+<main-section>
 	<section class="section">
 		<h1 class="header">Новости</h1>
 
@@ -22,14 +15,14 @@
 			[infiniteScrollContainer]="'body'"
 			(scrolled)="onScroll()"
 		>
-			<div class="raw-wrapper" *ngFor="let item of scrollingNews">
+			<div class="news-wrapper" *ngFor="let item of scrollingNews">
 				<div class="news" (click)="toOneNews(item.id)">
-					<h3>{{ item.title }}</h3>
+					<h3 class="header-3">{{ item.title }}</h3>
 					<div
 						class="news-content"
 						[style.backgroundImage]="'url(' + imgUrl + item.imageName + ')'"
 					>
-						<div class="overlay"></div>
+						<div class="news-content__overlay"></div>
 						<p>{{ item.text }}</p>
 					</div>
 				</div>
@@ -45,6 +38,6 @@
 		</div>
 
 		<!-- spinner -->
-		<app-spinner *ngIf="isSpinning"></app-spinner>
+		<spinner *ngIf="isSpinning"></spinner>
 	</section>
-</main>
+</main-section>

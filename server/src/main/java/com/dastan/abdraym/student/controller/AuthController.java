@@ -3,8 +3,8 @@ package com.dastan.abdraym.student.controller;
 import com.dastan.abdraym.student.model.Role;
 import com.dastan.abdraym.student.model.RoleName;
 import com.dastan.abdraym.student.model.User;
-import com.dastan.abdraym.student.report.request.SignInForm;
-import com.dastan.abdraym.student.report.request.SignUpForm;
+import com.dastan.abdraym.student.report.request.LoginRequest;
+import com.dastan.abdraym.student.report.request.RegistrationRequest;
 import com.dastan.abdraym.student.report.response.JwtResponse;
 import com.dastan.abdraym.student.report.response.Response;
 import com.dastan.abdraym.student.repository.RoleRepository;
@@ -44,37 +44,38 @@ public class AuthController {
     }
 
     @PostMapping("/signin")
-    public ResponseEntity<?> authenticateUser(@Valid @RequestBody SignInForm signInRequest) {
-        User user = userRepository.findByUsername(signInRequest.getUsername())
+    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+        User user = userRepository.findByUsername(loginRequest.getUsername())
                 .orElseThrow(() -> new EntityNotFoundException("Fail! -> User not found!"));
 
         // validation
         Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(signInRequest.getUsername(), signInRequest.getPassword())
+                new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword())
         );
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
+        // authorities
         String jwt = jwtProvider.generateJwtToken(authentication);
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 
-        return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getUsername(), user.getProfileImage(), userDetails.getAuthorities()));
+        return ResponseEntity.ok(new JwtResponse(jwt, user.getId(), user.getProfileImage(), userDetails.getAuthorities()));
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpForm signUpRequest) {
-        if (userRepository.existsByUsername(signUpRequest.getUsername())) {
-            return new ResponseEntity<>("Fail -> Username is already taken!", HttpStatus.BAD_REQUEST);
+    public ResponseEntity<?> registerUser(@Valid @RequestBody RegistrationRequest registrationRequest) {
+        if (userRepository.existsByUsername(registrationRequest.getUsername())) {
+            return new ResponseEntity<>(new Response("Fail -> Username is already taken!"), HttpStatus.BAD_REQUEST);
         }
 
-        if (userRepository.existsByEmail(signUpRequest.getEmail())) {
-            return new ResponseEntity<>("Fail -> Email is already in use!", HttpStatus.BAD_REQUEST);
+        if (userRepository.existsByEmail(registrationRequest.getEmail())) {
+            return new ResponseEntity<>(new Response("Fail -> Email is already in use!"), HttpStatus.BAD_REQUEST);
         }
 
-        User user = new User(signUpRequest.getUsername(), signUpRequest.getName(), signUpRequest.getSurname(),
-                signUpRequest.getEmail(), passwordEncoder.encode(signUpRequest.getPassword()));
+        User user = new User(registrationRequest.getUsername(), registrationRequest.getName(), registrationRequest.getSurname(),
+                registrationRequest.getEmail(), passwordEncoder.encode(registrationRequest.getPassword()));
 
-        Set<String> strRoles = signUpRequest.getRoles();
+        Set<String> strRoles = registrationRequest.getRoles();
         Set<Role> roles = new HashSet<>();
 
         strRoles.forEach(role -> {

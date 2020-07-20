@@ -1,21 +1,19 @@
-import { Component, OnInit, HostListener } from '@angular/core'
-import { NewsService, News } from '../shared/news.service'
+import { Component, OnInit } from '@angular/core'
+import { NewsService, News } from '../shared/services/news.service'
 import { MatDialog, MatDialogConfig } from '@angular/material'
 import { NewsCreateComponent } from 'src/app/news-create/news-create.component'
-import { TokenService } from '../auth/token.service'
+import { TokenService } from '../shared/services/token.service'
 import { Title } from '@angular/platform-browser'
 import { Router } from '@angular/router'
 
 @Component({
-	selector: 'app-news',
+	selector: 'news',
 	templateUrl: './news.component.html',
 	styleUrls: ['./news.component.scss']
 })
 export class NewsComponent implements OnInit {
 	news: News[] = []
 	authority: string
-	shouldSlide: boolean
-	innerWidth: any
 	scrollingNews: News[] = []
 	scrollValue: number = 0
 	isSpinning: boolean = false
@@ -37,8 +35,6 @@ export class NewsComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		this.slideOnWidth()
-
 		if (this.token.getToken()) {
 			const roles = this.token.getAuthorities()
 			roles.every(role => {
@@ -64,22 +60,11 @@ export class NewsComponent implements OnInit {
 
 		this.isSpinning = false
 
-		this.scrollValue += 4
+		this.scrollValue += 6
 	}
 
 	sliceNews() {
-		return this.news.slice(this.scrollValue, this.scrollValue + 4)
-	}
-
-	slideOnWidth() {
-		this.innerWidth = window.innerWidth
-		if (this.innerWidth <= 768) this.shouldSlide = false
-		else this.shouldSlide = true
-	}
-
-	@HostListener('window:resize', ['$event'])
-	onResize(event: Event) {
-		this.slideOnWidth()
+		return this.news.slice(this.scrollValue, this.scrollValue + 6)
 	}
 
 	getNews() {
@@ -88,8 +73,8 @@ export class NewsComponent implements OnInit {
 				return b.id - a.id
 			})
 
-			this.scrollingNews = this.news.slice(this.scrollValue, this.scrollValue + 4)
-			this.scrollValue += 4
+			this.scrollingNews = this.news.slice(this.scrollValue, this.scrollValue + 6)
+			this.scrollValue += 6
 		})
 	}
 

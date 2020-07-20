@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import {
 	QuizService,
 	QUIZ_ID_KEY,
@@ -7,19 +7,17 @@ import {
 	PROGRESS_KEY,
 	QUESTIONS_KEY,
 	USER_ANSWERS_KEY
-} from '../shared/quiz.service'
+} from '../shared/services/quiz.service'
 import { ActivatedRoute, Router } from '@angular/router'
 import { Title } from '@angular/platform-browser'
 
 @Component({
-	selector: 'app-quiz',
+	selector: 'quiz',
 	templateUrl: './quiz.component.html',
 	styleUrls: ['./quiz.component.scss']
 })
 export class QuizComponent implements OnInit {
 	id: number
-	shouldSlide: boolean
-	innerWidth: any
 
 	constructor(
 		private quizService: QuizService,
@@ -29,8 +27,6 @@ export class QuizComponent implements OnInit {
 	) {}
 
 	ngOnInit() {
-		this.slideOnWidth()
-
 		this.id = this.activatedRoute.snapshot.params['id']
 
 		if (
@@ -63,17 +59,6 @@ export class QuizComponent implements OnInit {
 			this.getQuiz(this.id)
 			this.startTimer()
 		}
-	}
-
-	slideOnWidth() {
-		this.innerWidth = window.innerWidth
-		if (this.innerWidth <= 768) this.shouldSlide = false
-		else this.shouldSlide = true
-	}
-
-	@HostListener('window:resize', ['$event'])
-	onResize(event: Event) {
-		this.slideOnWidth()
 	}
 
 	getQuiz(id: number) {

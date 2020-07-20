@@ -1,52 +1,53 @@
+@import 'utilities/variables';
+@import 'utilities/mixins';
+
 #toolbar {
 	height: 50px;
 	background: #fff;
 	padding-right: 20px;
+}
 
-	.dropdown {
-		float: right;
-		position: relative;
-		font-size: 0.9rem;
+.dropdown {
+	float: right;
+	position: relative;
+	font-size: 0.9rem;
+}
 
-		.dropdown-select {
-			height: 50px;
-			display: flex;
-			align-items: center;
-			color: #252525;
-			padding: 10px;
-			cursor: pointer;
+.dropdown-select {
+	height: 50px;
+	display: flex;
+	align-items: center;
+	color: $darkColor;
+	padding: 10px;
+	cursor: pointer;
 
-			mat-icon {
-				&::selection {
-					color: none;
-					background: none;
-				}
-			}
+	mat-icon {
+		@include icon;
+	}
 
-			&:hover {
-				background: #f9f9f9;
-			}
+	&:hover {
+		background: #f9f9f9;
+	}
 
-			&.select-active {
-				background: #f9f9f9;
-			}
-		}
+	&._active {
+		background: #f9f9f9;
+	}
+}
 
-		.dropdown-content {
-			right: 0;
-			position: absolute;
-			background-color: #f9f9f9;
-			width: 100%;
-			z-index: 1;
+.dropdown-content {
+	right: 0;
+	position: absolute;
+	background-color: #f9f9f9;
+	width: 100%;
+	z-index: 1;
 
-			a {
-				padding: 10px;
-				display: block;
+	a {
+		padding: 10px;
+		display: block;
+		color: inherit;
 
-				&:hover {
-					background: #f1f1f1;
-				}
-			}
+		&:hover {
+			background: #f1f1f1;
 		}
 	}
 }
@@ -54,12 +55,7 @@
 .avatar {
 	width: 32px;
 	height: 32px;
-	background: #f1f1f1;
 	border-radius: 50%;
 	margin-right: 10px;
-	background-color: #f1f1f1;
-	// background-image: url('../../assets/images/avatar.jpg');
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: cover;
+	@include background;
 }

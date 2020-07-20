@@ -1,0 +1,40 @@
+@import 'utilities/variables';
+@import 'utilities/mixins';
+
+.tabs {
+	display: flex;
+	justify-content: flex-start;
+	background: #fff;
+	width: 100%;
+}
+
+.tab {
+	display: block;
+	max-width: 200px;
+	width: 100%;
+	padding: 13px 0;
+	text-align: center;
+	color: $darkColor;
+	font-size: 0.9rem;
+	font-weight: 400;
+	cursor: pointer;
+	transition: background 0.2s linear;
+
+	&:hover {
+		background: #f1f1f1;
+	}
+
+	&:first-child {
+		border-top-left-radius: 10px;
+	}
+
+	&:last-child {
+		border-top-right-radius: 10px;
+	}
+
+	&.active {
+		font-weight: 700;
+		background: #f1f1f1;
+		border-bottom: 2px solid $blueColor;
+	}
+}

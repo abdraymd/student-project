@@ -1,5 +1,5 @@
 <div>
-	<h3>
+	<h3 class="header-3">
 		{{ dateService.date | async | moment | date }}
 	</h3>
 
@@ -9,14 +9,14 @@
 				<b>{{ i + 1 }}</b> {{ task.title }}
 			</span>
 
-			<mat-icon (click)="remove(task)" title="Удалить">
+			<mat-icon class="btn-icon" (click)="remove(task)" title="Удалить">
 				clear
 			</mat-icon>
 		</li>
 	</ul>
 
 	<ng-template #noTasks>
-		<p class="text">Заметок нет</p>
+		<p>Заметок нет</p>
 	</ng-template>
 
 	<form
@@ -29,7 +29,7 @@
 			class="input-text"
 			placeholder="Новая заметка"
 			formControlName="title"
-			[class.invalid]="title.invalid && title.touched"
+			[class._invalid]="title.invalid && title.touched"
 		/>
 
 		<button class="btn-block" type="submit" [disabled]="formGroup.invalid && formGroup.touched">
