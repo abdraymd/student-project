@@ -1,6 +1,19 @@
 <div id="toolbar">
+	<!-- toggle -->
+	<div class="toggle">
+		<button mat-mini-fab title="Меню" class="toggle-btn" (click)="toggle()">
+			<mat-icon>menu</mat-icon>
+		</button>
+	</div>
+
+	<!-- logo -->
+	<div class="logo">
+		<a routerLink="/">student</a>
+	</div>
+
+	<!-- dropdown -->
 	<div class="dropdown" (clickOutside)="closeOptions()">
-		<div class="dropdown-select" [class._active]="showOptions" (click)="show()">
+		<div class="dropdown-select" [class.active]="showOptions" (click)="show()">
 			<div
 				class="avatar"
 				[style.backgroundImage]="avatar ? 'url(' + avatarUrl + ')' : defaultAvatar"

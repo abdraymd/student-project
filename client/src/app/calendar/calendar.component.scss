@@ -4,6 +4,7 @@
 .calendar {
 	width: 100%;
 	padding: 15px 20px 15px 20px;
+	border: 1px solid #f1f1f1;
 	@include block;
 
 	table {

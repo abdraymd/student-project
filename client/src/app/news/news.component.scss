@@ -42,6 +42,7 @@ button {
 	height: 320px;
 	cursor: pointer;
 	overflow: hidden;
+	border: 1px solid #f1f1f1;
 	@include block;
 
 	&:hover {
@@ -87,7 +88,7 @@ button {
 		padding: 0 20px;
 		position: absolute;
 		z-index: 1;
-		bottom: 12px;
+		bottom: 15px;
 		left: 0;
 		text-overflow: ellipsis;
 		word-wrap: break-word;
@@ -101,26 +102,12 @@ button {
 		transition: opacity 0.3s linear;
 	}
 
-	@media screen and (max-width: 980px) {
-		p {
-			bottom: 16px;
-		}
-	}
-
 	@media screen and (max-width: 660px) {
 		height: 380px;
-
-		p {
-			bottom: 20px;
-		}
 	}
 
 	@media screen and (max-width: 480px) {
 		height: 340px;
-
-		p {
-			bottom: 12px;
-		}
 	}
 
 	@media screen and (max-width: 480px) {

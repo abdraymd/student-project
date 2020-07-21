@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core'
 import { TokenService } from '../shared/services/token.service'
 import { Router } from '@angular/router'
 
@@ -10,6 +10,8 @@ import { Router } from '@angular/router'
 export class ToolbarComponent implements OnInit {
 	showOptions: boolean = false
 	avatar: string = ''
+	@Input() isToggleActive: boolean
+	@Output() toggleClicked: EventEmitter<boolean> = new EventEmitter<boolean>()
 
 	constructor(private token: TokenService, private router: Router) {}
 
@@ -17,6 +19,10 @@ export class ToolbarComponent implements OnInit {
 		if (this.token.getAvatar()) {
 			this.avatar = this.token.getAvatar()
 		}
+	}
+
+	toggle() {
+		this.toggleClicked.emit(!this.isToggleActive)
 	}
 
 	show() {

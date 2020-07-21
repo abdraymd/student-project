@@ -1,10 +1,8 @@
-@import 'utilities/mixins';
-
 .schedule {
 	display: flex;
 	align-items: flex-start;
 	flex: 0 0 calc(50% - 20px);
-	max-width: 1040px;
+	max-width: 1150px;
 
 	@media screen and (max-width: 740px) {
 		flex: 0 0 100%;

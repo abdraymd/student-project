@@ -1,8 +1,8 @@
-<!-- sidebar -->
-<sidebar></sidebar>
-
 <!-- toolbar -->
-<toolbar></toolbar>
+<toolbar [isToggleActive]="toggleState" (toggleClicked)="getToggleState($event)"></toolbar>
+
+<!-- sidebar -->
+<sidebar [isToggleActive]="toggleState"></sidebar>
 
 <main [class.slide]="shouldSlide">
 	<!-- content -->

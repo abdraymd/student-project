@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core'
+import { Component, Input } from '@angular/core'
 import { UserService } from '../shared/services/user.service'
 import { TokenService } from '../shared/services/token.service'
 import { MatDialog, MatDialogConfig } from '@angular/material'

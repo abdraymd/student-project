@@ -60,11 +60,11 @@ export class BooksComponent implements OnInit {
 
 		this.isSpinning = false
 
-		this.scrollValue += 8
+		this.scrollValue += 12
 	}
 
 	sliceBooks() {
-		return this.books.slice(this.scrollValue, this.scrollValue + 8)
+		return this.books.slice(this.scrollValue, this.scrollValue + 12)
 	}
 
 	getBooks() {
@@ -74,7 +74,7 @@ export class BooksComponent implements OnInit {
 			})
 
 			this.scrollingBooks = this.sliceBooks()
-			this.scrollValue += 8
+			this.scrollValue += 12
 		})
 	}
 
@@ -84,7 +84,7 @@ export class BooksComponent implements OnInit {
 
 			this.scrollValue = 0
 			this.scrollingBooks = this.sliceBooks()
-			this.scrollValue += 8
+			this.scrollValue += 12
 		})
 	}
 

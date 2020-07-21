@@ -1,7 +1,11 @@
-<div id="sidebar" [class.sidebar-active]="isToggleActive" (clickOutside)="closeToggle()">
-	<button mat-mini-fab title="Меню" class="toggle-btn" (click)="toggle()">
-		<mat-icon>menu</mat-icon>
-	</button>
+<div id="sidebar" [class.sidebar-active]="isToggleActive">
+	<div class="sidebar-profile">
+		<div
+			class="avatar"
+			[style.backgroundImage]="avatar ? 'url(' + avatarUrl + ')' : defaultAvatar"
+		></div>
+		<h3 class="header-3">{{ fullname }}</h3>
+	</div>
 
 	<ul>
 		<li>

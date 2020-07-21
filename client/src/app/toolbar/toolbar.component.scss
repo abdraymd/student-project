@@ -2,13 +2,58 @@
 @import 'utilities/mixins';
 
 #toolbar {
+	position: fixed;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
 	height: 50px;
-	background: #fff;
+	background: rgba(255, 255, 255, 0.98);
 	padding-right: 20px;
+	padding-left: 20px;
+	z-index: 3;
+}
+
+.toggle {
+	width: 150px;
+	margin-top: 5px;
+}
+
+.toggle-btn {
+	display: none;
+	background: #ededed;
+	box-shadow: none;
+	color: $darkColor;
+
+	@media screen and (max-width: 1200px) {
+		display: block;
+	}
+}
+
+.logo {
+	display: block;
+	font-family: 'Poppins';
+	font-weight: 700;
+	font-size: 28px;
+	margin-top: 2px;
+
+	a {
+		color: $darkColor;
+		transition: opacity 0.2s linear;
+
+		&:hover {
+			opacity: 0.8;
+		}
+	}
+
+	@media screen and (max-width: 480px) {
+		display: none;
+	}
 }
 
 .dropdown {
-	float: right;
+	display: flex;
+	justify-content: center;
+	width: 150px;
 	position: relative;
 	font-size: 0.9rem;
 }
@@ -29,12 +74,13 @@
 		background: #f9f9f9;
 	}
 
-	&._active {
+	&.active {
 		background: #f9f9f9;
 	}
 }
 
 .dropdown-content {
+	top: 50px;
 	right: 0;
 	position: absolute;
 	background-color: #f9f9f9;
@@ -57,5 +103,6 @@
 	height: 32px;
 	border-radius: 50%;
 	margin-right: 10px;
+	border: 1px solid #f1f1f1;
 	@include background;
 }
