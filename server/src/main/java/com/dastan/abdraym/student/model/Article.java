@@ -2,10 +2,10 @@ package com.dastan.abdraym.student.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 
 @Entity
-public class News {
+@Table(name = "articles")
+public class Article {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,10 +22,10 @@ public class News {
 
     private String imageName;
 
-    public News() {
+    public Article() {
     }
 
-    public News(String title, String text, String date) {
+    public Article(String title, String text, String date) {
         this.title = title;
         this.text = text;
         this.date = date;
@@ -73,7 +73,7 @@ public class News {
 
     @Override
     public String toString() {
-        return "News{" +
+        return "Article{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", text='" + text + '\'' +

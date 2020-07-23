@@ -18,8 +18,8 @@ import { QuizListComponent } from './quiz-list/quiz-list.component'
 import { QuizComponent } from './quiz/quiz.component'
 import { QuizManagementComponent } from './quiz-management/quiz-management.component'
 import { QuestionCreateComponent } from './question-create/question-create.component'
-import { NewsComponent } from './news/news.component'
-import { NewsCreateComponent } from './news-create/news-create.component'
+import { ArticlesComponent } from './articles/articles.component'
+import { ArticleCreateComponent } from './article-create/article-create.component'
 import { QuizCreateComponent } from './quiz-create/quiz-create.component'
 import { registerLocaleData } from '@angular/common'
 import localeRu from '@angular/common/locales/ru'
@@ -29,7 +29,7 @@ import { BookComponent } from './book/book.component'
 import { SidebarComponent } from './sidebar/sidebar.component'
 import { ToolbarComponent } from './toolbar/toolbar.component'
 import { ClickOutsideDirective } from './shared/other/click-outside.directive'
-import { NewsSingleComponent } from './news-single/news-single.component'
+import { ArticleComponent } from './article/article.component'
 import { PasswordForgotComponent } from './password-forgot/password-forgot.component'
 import { PasswordResetComponent } from './password-reset/password-reset.component'
 import { InfiniteScrollModule } from 'ngx-infinite-scroll'
@@ -59,15 +59,15 @@ registerLocaleData(localeRu, 'ru')
 		QuizCreateComponent,
 		QuizManagementComponent,
 		QuestionCreateComponent,
-		NewsComponent,
-		NewsCreateComponent,
+		ArticlesComponent,
+		ArticleCreateComponent,
 		BooksComponent,
 		BooksCreateComponent,
 		BookComponent,
 		SidebarComponent,
 		ToolbarComponent,
 		ClickOutsideDirective,
-		NewsSingleComponent,
+		ArticleComponent,
 		PasswordForgotComponent,
 		PasswordResetComponent,
 		SpinnerComponent,
@@ -97,7 +97,7 @@ registerLocaleData(localeRu, 'ru')
 	entryComponents: [
 		QuizCreateComponent,
 		QuestionCreateComponent,
-		NewsCreateComponent,
+		ArticleCreateComponent,
 		BooksCreateComponent,
 		PasswordChangeComponent
 	]

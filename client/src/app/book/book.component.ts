@@ -26,7 +26,7 @@ export class BookComponent implements OnInit {
 
 	getBook(id: number) {
 		this.bookService.getOne(id).subscribe(response => {
-			this.title.setTitle('Библиотека: ' + response.name)
+			this.title.setTitle(response.name)
 			this.book = response
 		})
 	}

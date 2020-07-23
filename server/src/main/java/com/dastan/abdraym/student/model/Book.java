@@ -2,7 +2,6 @@ package com.dastan.abdraym.student.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 
 @Entity
 @Table(

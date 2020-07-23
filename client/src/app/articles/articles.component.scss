@@ -6,7 +6,7 @@ button {
 	}
 }
 
-.news-wrapper {
+.articles-wrapper {
 	flex: 0 0 calc(33.3333% - 20px);
 	height: 320px;
 	@include flexRow;
@@ -34,7 +34,7 @@ button {
 	}
 }
 
-.news {
+.articles {
 	display: flex;
 	flex-direction: column;
 	position: relative;
@@ -46,7 +46,7 @@ button {
 	@include block;
 
 	&:hover {
-		.news-content__overlay {
+		.articles-content__overlay {
 			opacity: 0.5;
 		}
 
@@ -76,7 +76,7 @@ button {
 	}
 }
 
-.news-content {
+.articles-content {
 	position: relative;
 	margin-top: auto;
 	width: 100%;
@@ -115,7 +115,7 @@ button {
 	}
 }
 
-.news-content__overlay {
+.articles-content__overlay {
 	width: 100%;
 	height: 100%;
 	position: absolute;

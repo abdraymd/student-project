@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
 				this.token.saveAuthorities(data.authorities)
 
 				this.isLoggedIn = true
-				this.router.navigate(['news']).then(() => window.location.reload())
+				this.router.navigate(['articles']).then(() => window.location.reload())
 			},
 			error => {
 				console.log(error)

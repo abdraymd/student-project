@@ -1,9 +1,9 @@
 <main-section>
 	<section class="section">
-		<h1 class="header">Новости</h1>
+		<h1 class="header">Статьи</h1>
 
 		<button class="btn-block" *ngIf="authority === 'admin'" (click)="onAdd()">
-			Добавить новость
+			Добавить статью
 		</button>
 
 		<div
@@ -15,22 +15,22 @@
 			[infiniteScrollContainer]="'body'"
 			(scrolled)="onScroll()"
 		>
-			<div class="news-wrapper" *ngFor="let item of scrollingNews">
-				<div class="news" (click)="toOneNews(item.id)">
-					<h3 class="header-3">{{ item.title }}</h3>
+			<div class="articles-wrapper" *ngFor="let article of scrollingArticles">
+				<div class="articles" (click)="toArticle(article.id)">
+					<h3 class="header-3">{{ article.title }}</h3>
 					<div
-						class="news-content"
-						[style.backgroundImage]="'url(' + imgUrl + item.imageName + ')'"
+						class="articles-content"
+						[style.backgroundImage]="'url(' + imgUrl + article.imageName + ')'"
 					>
-						<div class="news-content__overlay"></div>
-						<p>{{ item.text }}</p>
+						<div class="articles-content__overlay"></div>
+						<p>{{ article.text }}</p>
 					</div>
 				</div>
 				<mat-icon
 					class="btn-close"
 					title="Удалить"
 					*ngIf="authority === 'admin'"
-					(click)="deleteNews(item)"
+					(click)="deleteArticle(article)"
 				>
 					clear
 				</mat-icon>

@@ -15,14 +15,15 @@
 
 .toggle {
 	width: 150px;
-	margin-top: 5px;
+	padding-top: 10px;
 }
 
 .toggle-btn {
 	display: none;
-	background: #ededed;
-	box-shadow: none;
+	cursor: pointer;
 	color: $darkColor;
+	font-size: 28px;
+	@include icon;
 
 	@media screen and (max-width: 1200px) {
 		display: block;
@@ -85,7 +86,7 @@
 	position: absolute;
 	background-color: #f9f9f9;
 	width: 100%;
-	z-index: 1;
+	z-index: 4;
 
 	a {
 		padding: 10px;

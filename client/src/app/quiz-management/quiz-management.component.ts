@@ -53,7 +53,7 @@ export class QuizManagementComponent implements OnInit {
 				return a.id - b.id
 			})
 
-			this.title.setTitle('Управление: ' + response.name)
+			this.title.setTitle(response.name)
 			this.quiz = response
 		})
 	}

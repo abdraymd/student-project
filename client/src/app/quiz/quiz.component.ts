@@ -34,7 +34,7 @@ export class QuizComponent implements OnInit {
 			parseInt(sessionStorage.getItem(SECONDS_KEY)) > 0
 		) {
 			this.quizService.quizName = sessionStorage.getItem(QUIZ_NAME_KEY)
-			this.title.setTitle('Тест: ' + this.quizService.quizName)
+			this.title.setTitle(this.quizService.quizName)
 
 			this.quizService.seconds = parseInt(sessionStorage.getItem(SECONDS_KEY))
 			this.quizService.progress = parseInt(sessionStorage.getItem(PROGRESS_KEY))
@@ -64,7 +64,7 @@ export class QuizComponent implements OnInit {
 	getQuiz(id: number) {
 		this.quizService.getQuiz(this.id).subscribe((response: any) => {
 			this.quizService.quizName = response.name
-			this.title.setTitle('Тест: ' + this.quizService.quizName)
+			this.title.setTitle(this.quizService.quizName)
 			sessionStorage.setItem(QUIZ_NAME_KEY, this.quizService.quizName)
 
 			this.quizService.questions = response.questions

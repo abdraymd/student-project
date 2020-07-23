@@ -1,6 +1,6 @@
 <main-section>
 	<section class="section" *ngIf="quiz">
-		<h1 class="header">Управление: {{ quiz.name }}</h1>
+		<h1 class="header">{{ quiz.name }}</h1>
 
 		<div class="quiz-mr">
 			<div *ngIf="authority === 'admin'; else accessDenied">

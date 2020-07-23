@@ -16,7 +16,7 @@
 	</ul>
 
 	<ng-template #noTasks>
-		<p>Заметок нет</p>
+		<p>Действий нет</p>
 	</ng-template>
 
 	<form
@@ -27,9 +27,9 @@
 		<input
 			type="text"
 			class="input-text"
-			placeholder="Новая заметка"
+			placeholder="Новое действие"
 			formControlName="title"
-			[class._invalid]="title.invalid && title.touched"
+			[class.invalid]="title.invalid && title.touched"
 		/>
 
 		<button class="btn-block" type="submit" [disabled]="formGroup.invalid && formGroup.touched">

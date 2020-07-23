@@ -111,10 +111,10 @@
 
 // wrapper
 .section {
-	margin: 80px 50px 30px 50px;
+	padding: 76px 50px 26px 50px;
 
 	@media screen and (max-width: 480px) {
-		margin: 80px 30px 30px 30px;
+		padding: 80px 50px 30px 50px;
 	}
 }
 

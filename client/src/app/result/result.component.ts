@@ -30,7 +30,7 @@ export class ResultComponent implements OnInit {
 			this.condition = true
 
 			this.quizService.quizName = sessionStorage.getItem(QUIZ_NAME_KEY)
-			this.title.setTitle('Результат: ' + this.quizService.quizName)
+			this.title.setTitle(this.quizService.quizName)
 
 			this.quizService.seconds = parseInt(sessionStorage.getItem(SECONDS_KEY))
 			this.quizService.progress = parseInt(sessionStorage.getItem(PROGRESS_KEY))

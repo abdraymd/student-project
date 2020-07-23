@@ -1,20 +1,20 @@
 import { Component, OnInit } from '@angular/core'
 import { MatDialogRef } from '@angular/material'
 import { FormGroup, FormBuilder, Validators } from '@angular/forms'
-import { NewsService } from '../shared/services/news.service'
+import { ArticleService } from '../shared/services/article.service'
 import { DateService } from '../shared/services/date.service'
 
 @Component({
-	selector: 'news-create',
-	templateUrl: './news-create.component.html',
-	styleUrls: ['./news-create.component.scss']
+	selector: 'article-create',
+	templateUrl: './article-create.component.html',
+	styleUrls: ['./article-create.component.scss']
 })
-export class NewsCreateComponent implements OnInit {
+export class ArticleCreateComponent implements OnInit {
 	formGroup: FormGroup
 
 	constructor(
-		public dialogBox: MatDialogRef<NewsCreateComponent>,
-		private newsService: NewsService,
+		public dialogBox: MatDialogRef<ArticleCreateComponent>,
+		private articleService: ArticleService,
 		private dateService: DateService,
 		private formBuilder: FormBuilder
 	) {}
@@ -45,9 +45,9 @@ export class NewsCreateComponent implements OnInit {
 		formData.append('date', this.dateService.date.value.format('DD-MM-YYYY'))
 		formData.append('image', this.image.value)
 
-		this.newsService.create(formData).subscribe(
+		this.articleService.create(formData).subscribe(
 			response => {
-				this.newsService.filter('Registered!')
+				this.articleService.filter('Registered!')
 				this.onClose()
 			},
 			error => {

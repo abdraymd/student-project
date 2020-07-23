@@ -1,0 +1,15 @@
+<main-section>
+	<section class="section" *ngIf="article">
+		<h1 class="header">{{ article.title }}</h1>
+
+		<div class="article">
+			<div
+				class="article__image"
+				[style.backgroundImage]="'url(' + imgUrl + article.imageName + ')'"
+			></div>
+			<h3 class="header-3">{{ article.title }}</h3>
+			<p>{{ article.text }}</p>
+			<p>{{ article.date }}</p>
+		</div>
+	</section>
+</main-section>
